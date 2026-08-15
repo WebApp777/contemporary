@@ -6,6 +6,14 @@
     <title>TNH.PROJECT — пространство, где танец начинается с тишины внутри</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @font-face {
+            font-family: 'Sol Kol';
+            src: url('fonts/ofont.ru_Sol Kol.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: #0a0a0a;
@@ -15,11 +23,32 @@
             letter-spacing: 0.3px;
         }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        h1, h2, h3 { font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
+        h1, h2, h3 {
+            font-family: 'Sol Kol', 'Segoe UI', sans-serif;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
         h1 { font-size: 2.8rem; color: #ffffff; margin-bottom: 12px; }
         h2 { font-size: 2.2rem; color: #ffffff; margin-bottom: 32px; border-left: 5px solid #e63946; padding-left: 20px; }
         h3 { font-size: 1.4rem; color: #ffffff; margin-bottom: 16px; }
         p { color: #d0d0d0; margin-bottom: 1.2rem; font-size: 1.1rem; }
+        
+        /* Анимация заголовков */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-title {
+            animation: fadeInUp 0.8s ease-out;
+        }
         
         header {
             background: #0a0a0a;
@@ -36,7 +65,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .logo { font-size: 1.9rem; font-weight: 700; letter-spacing: 4px; color: #fff; white-space: nowrap; }
+        .logo { font-family: 'Sol Kol', sans-serif; font-size: 1.9rem; font-weight: 700; letter-spacing: 4px; color: #fff; white-space: nowrap; }
         .logo span { color: #e63946; }
         nav { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; }
         nav a {
@@ -53,7 +82,7 @@
         nav a:hover { color: #e63946; }
         
         .hero { padding: 70px 0 50px; text-align: center; background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%); }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; animation: fadeInUp 1s ease-out; }
         .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 1.3rem; color: #d4d4d4; font-style: italic; }
         .btn-red {
             display: inline-block;
@@ -67,7 +96,9 @@
             text-transform: uppercase;
             border: 1px solid #e63946;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
+        .btn-red:hover { background: #b71c2c; transform: scale(1.05); }
         
         .manifesto {
             background: #111;
@@ -103,6 +134,7 @@
         .teacher-photo img { width: 100%; height: 100%; object-fit: cover; }
         .teacher-info { flex: 1; }
         .teacher-name {
+            font-family: 'Sol Kol', sans-serif;
             font-size: 1.5rem;
             color: #e63946;
             margin-bottom: 8px;
@@ -144,7 +176,7 @@
             text-underline-offset: 3px;
         }
         
-        .gallery-section { padding: 40px 0; margin-bottom: 40px; }
+        .gallery-section { margin-bottom: 40px; }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -190,6 +222,7 @@
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
         
+        /* Модальное окно с перелистыванием */
         .modal {
             display: none;
             position: fixed;
@@ -212,6 +245,22 @@
             font-size: 2rem;
             cursor: pointer;
         }
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 1001;
+        }
+        .modal-prev { left: 20px; }
+        .modal-next { right: 20px; }
         
         .requirements {
             background: #fff;
@@ -235,7 +284,9 @@
             padding: 30px 25px;
             width: 260px;
             text-align: center;
+            transition: all 0.3s ease;
         }
+        .price-card:hover { transform: translateY(-5px); border-color: #e63946; }
         .price-card h3 { color: #e63946; }
         .price-card .price { font-size: 2.5rem; font-weight: 700; color: #fff; margin: 10px 0; }
         .price-card .per-class { color: #aaa; font-size: 0.9rem; text-transform: uppercase; }
@@ -258,8 +309,21 @@
             background: #1a1a1a; padding: 12px 24px; border-radius: 50px;
             color: #ddd; text-decoration: none; font-weight: 500;
             border: 1px solid #3a3a3a;
+            transition: all 0.3s ease;
         }
-        .social-link i { font-size: 1.5rem; color: #e63946; }
+        .social-link i { font-size: 1.5rem; color: #e63946; transition: all 0.3s ease; }
+        .social-link:hover {
+            background: #e63946;
+            border-color: #e63946;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+        }
+        .social-link:hover i { color: #fff; transform: scale(1.2); }
+        .social-link:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 5px rgba(230, 57, 70, 0.3);
+        }
         
         footer {
             background: #050505;
@@ -269,7 +333,7 @@
             margin-top: 60px;
         }
         footer p { color: #888; font-size: 0.9rem; }
-        .footer-note { color: #e63946; letter-spacing: 2px; }
+        .footer-note { font-family: 'Sol Kol', sans-serif; color: #e63946; letter-spacing: 2px; }
         
         .admin-panel {
             background: #111;
@@ -315,8 +379,6 @@
         .login-form input { margin-bottom: 15px; }
         
         .hidden { display: none !important; }
-        .admin-trigger { text-align: center; margin: 40px 0; }
-        .admin-trigger a { color: #e63946; cursor: pointer; text-decoration: underline; }
         
         .admin-gallery {
             display: flex;
@@ -366,7 +428,7 @@
     <div class="container header-inner">
         <div class="logo">TNH<span>.PROJECT</span></div>
         <nav>
-            <a href="#teacher">Преподаватель</a>
+            <a href="#teacher">Руководитель</a>
             <a href="#gallery">Галерея</a>
             <a href="#about">О нас</a>
             <a href="#why">Почему мы</a>
@@ -393,14 +455,14 @@
 
 <section id="teacher" class="teacher-section">
     <div class="container">
-        <h2>Преподаватель</h2>
+        <h2 class="section-title">Руководитель</h2>
         <div class="teacher-card">
             <div class="teacher-photo">
-                <img id="teacherPhoto" src="" alt="Преподаватель">
+                <img id="teacherPhoto" src="" alt="Руководитель">
             </div>
             <div class="teacher-info">
                 <h3 class="teacher-name" id="teacherName">Имя Фамилия</h3>
-                <p class="teacher-description collapsed" id="teacherDescription">Здесь будет информация о преподавателе.</p>
+                <p class="teacher-description collapsed" id="teacherDescription">Здесь будет информация о руководителе.</p>
                 <button class="read-more-btn" id="readMoreBtn" onclick="toggleTeacherDescription()">Читать дальше</button>
             </div>
         </div>
@@ -409,7 +471,7 @@
 
 <section id="gallery" class="gallery-section">
     <div class="container">
-        <h2>Галерея</h2>
+        <h2 class="section-title">Галерея</h2>
         <div class="gallery-grid" id="galleryGrid"></div>
         <div class="mobile-slider" id="mobileSlider">
             <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
@@ -420,14 +482,17 @@
 
 <div style="margin-bottom: 60px;"></div>
 
-<div class="modal" id="modal" onclick="closeModal()">
-    <span class="modal-close">×</span>
+<!-- Модальное окно с перелистыванием -->
+<div class="modal" id="modal">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <button class="modal-nav modal-prev" onclick="modalNavigate(-1)">❮</button>
     <img id="modalImage" src="" alt="Просмотр">
+    <button class="modal-nav modal-next" onclick="modalNavigate(1)">❯</button>
 </div>
 
 <section id="about">
     <div class="container">
-        <h2>Чем мы занимаемся</h2>
+        <h2 class="section-title">Чем мы занимаемся</h2>
         <p id="aboutDescription">Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.</p>
         <div style="background:#1a1a1a; border-radius:24px; padding:40px 30px; margin:40px 0; border:1px solid #2e2e2e;">
             <h3 style="color:#e63946;">О проекте</h3>
@@ -437,7 +502,7 @@
 </section>
 
 <section class="requirements" id="why">
-    <h2>Почему именно к нам?</h2>
+    <h2 class="section-title">Почему именно к нам?</h2>
     <ul>
         <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия, где важнее внутреннее состояние, чем внешняя оценка</li>
         <li><i class="fas fa-user-check"></i> Профессиональный хореограф, который помогает раскрыть индивидуальность через движение</li>
@@ -455,7 +520,7 @@
 
 <section id="prices">
     <div class="container">
-        <h2>Цены</h2>
+        <h2 class="section-title">Цены</h2>
         <p style="text-align:center; color:#ccc;">Длительность занятия — 90 минут</p>
         <div class="pricing-grid">
             <div class="price-card">
@@ -492,7 +557,7 @@
 
 <section id="contact">
     <div class="container">
-        <h2>Мы в соцсетях</h2>
+        <h2 class="section-title">Мы в соцсетях</h2>
         <div class="social-links">
             <a href="https://vk.ru/tnh.project" target="_blank" class="social-link"><i class="fab fa-vk"></i> VK</a>
             <a href="https://t.me/tnh_project" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i> Telegram</a>
@@ -502,14 +567,12 @@
     </div>
 </section>
 
-<div class="admin-trigger">
-    <a onclick="showLogin()"><i class="fas fa-lock"></i> Вход для администратора</a>
-</div>
-
+<!-- Скрытая форма входа (открывается по #admin в URL) -->
 <div id="loginForm" class="login-form hidden">
     <h3 style="color:#fff;">Вход в админ-панель</h3>
     <input type="password" id="passwordInput" placeholder="Пароль">
     <button class="admin-btn" onclick="checkLogin()">Войти</button>
+    <button class="admin-btn secondary" onclick="hideLogin()">Закрыть</button>
 </div>
 
 <div id="adminPanel" class="admin-panel">
@@ -533,12 +596,12 @@
     <label>Текст расписания</label>
     <textarea id="editScheduleText"></textarea>
     
-    <h3 style="color:#e63946;">👤 Преподаватель</h3>
-    <label>Имя преподавателя</label>
+    <h3 style="color:#e63946;">👤 Руководитель</h3>
+    <label>Имя руководителя</label>
     <input type="text" id="editTeacherName">
-    <label>Описание преподавателя</label>
+    <label>Описание руководителя</label>
     <textarea id="editTeacherDescription"></textarea>
-    <label>Фото преподавателя (загрузить файл)</label>
+    <label>Фото руководителя (загрузить файл)</label>
     <input type="file" id="teacherPhotoInput" accept="image/*" style="color:#fff;">
     <div id="teacherPhotoPreview" style="margin:10px 0;"></div>
     
@@ -582,6 +645,7 @@
     let siteData = {};
     let galleryImages = [];
     let currentSlide = 0;
+    let modalIndex = 0;
     let teacherPhotoFile = null;
     
     function getGithubConfig() {
@@ -600,6 +664,13 @@
             branch: localStorage.getItem('gh_branch') || 'main',
             token: localStorage.getItem('gh_token') || ''
         };
+    }
+    
+    // Проверка URL для входа в админку
+    function checkAdminURL() {
+        if (window.location.hash === '#admin') {
+            document.getElementById('loginForm').classList.remove('hidden');
+        }
     }
     
     async function loadData() {
@@ -631,7 +702,7 @@
             aboutProject: "Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.",
             scheduleText: "Здесь скоро появится актуальное расписание.\nСледите за обновлениями или напишите нам в соцсетях.",
             teacherName: "Имя Фамилия",
-            teacherDescription: "Здесь будет информация о преподавателе.",
+            teacherDescription: "Здесь будет информация о руководителе.",
             teacherPhoto: ""
         };
     }
@@ -651,7 +722,6 @@
             document.getElementById('teacherPhoto').src = siteData.teacherPhoto;
         }
         
-        // Проверяем, нужна ли кнопка "Читать дальше"
         toggleReadMoreButton();
     }
     
@@ -849,8 +919,8 @@
         if (galleryImages.length === 0) {
             grid.innerHTML = '<div class="gallery-empty">Фото скоро появятся</div>';
         } else {
-            grid.innerHTML = galleryImages.map((img) => 
-                `<div class="gallery-item" onclick="openModal('${img.url}')">
+            grid.innerHTML = galleryImages.map((img, index) => 
+                `<div class="gallery-item" onclick="openModal(${index})">
                     <img src="${img.url}" alt="Dance" loading="lazy">
                 </div>`
             ).join('');
@@ -864,7 +934,7 @@
             const imgEl = document.createElement('img');
             imgEl.src = img.url;
             imgEl.className = index === 0 ? 'active' : '';
-            imgEl.onclick = () => openModal(img.url);
+            imgEl.onclick = () => openModal(index);
             slider.appendChild(imgEl);
         });
     }
@@ -887,13 +957,19 @@
         images[currentSlide].classList.add('active');
     }
     
-    function openModal(url) {
-        document.getElementById('modalImage').src = url;
+    function openModal(index) {
+        modalIndex = index;
+        document.getElementById('modalImage').src = galleryImages[index].url;
         document.getElementById('modal').classList.add('active');
     }
     
     function closeModal() {
         document.getElementById('modal').classList.remove('active');
+    }
+    
+    function modalNavigate(direction) {
+        modalIndex = (modalIndex + direction + galleryImages.length) % galleryImages.length;
+        document.getElementById('modalImage').src = galleryImages[modalIndex].url;
     }
     
     async function deleteImage(path, sha) {
@@ -928,6 +1004,10 @@
     
     function showLogin() {
         document.getElementById('loginForm').classList.remove('hidden');
+    }
+    
+    function hideLogin() {
+        document.getElementById('loginForm').classList.add('hidden');
     }
     
     function checkLogin() {
@@ -1012,6 +1092,15 @@
         }
     });
     
+    // Закрытие модального окна по клику на фон
+    document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+    
+    // Инициализация
+    checkAdminURL();
     loadData();
 </script>
 </body>
