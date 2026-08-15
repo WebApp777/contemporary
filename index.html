@@ -51,7 +51,6 @@
             white-space: nowrap;
         }
         nav a:hover { color: #e63946; }
-        .admin-link { color: #e63946 !important; font-weight: 600; cursor: pointer; }
         
         .hero { padding: 70px 0 50px; text-align: center; background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%); }
         .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
@@ -86,7 +85,7 @@
         .teacher-card {
             display: flex;
             gap: 30px;
-            align-items: center;
+            align-items: flex-start;
             background: #111;
             border: 1px solid #2a2a2a;
             border-radius: 24px;
@@ -116,6 +115,33 @@
             line-height: 1.6;
             font-size: 0.95rem;
             font-style: italic;
+        }
+        .teacher-description.collapsed {
+            max-height: 80px;
+            overflow: hidden;
+            position: relative;
+        }
+        .teacher-description.collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(transparent, #111);
+        }
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: #e63946;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            padding: 0;
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
         
         .gallery-section { padding: 40px 0; margin-bottom: 40px; }
@@ -347,7 +373,6 @@
             <a href="#prices">Цены</a>
             <a href="#schedule">Расписание</a>
             <a href="#contact">Контакты</a>
-            <a class="admin-link" onclick="showLogin()"><i class="fas fa-lock"></i> Админ</a>
         </nav>
     </div>
 </header>
@@ -375,7 +400,8 @@
             </div>
             <div class="teacher-info">
                 <h3 class="teacher-name" id="teacherName">Имя Фамилия</h3>
-                <p class="teacher-description" id="teacherDescription">Здесь будет информация о преподавателе.</p>
+                <p class="teacher-description collapsed" id="teacherDescription">Здесь будет информация о преподавателе.</p>
+                <button class="read-more-btn" id="readMoreBtn" onclick="toggleTeacherDescription()">Читать дальше</button>
             </div>
         </div>
     </div>
@@ -623,6 +649,36 @@
         document.getElementById('teacherDescription').innerText = siteData.teacherDescription || '';
         if (siteData.teacherPhoto) {
             document.getElementById('teacherPhoto').src = siteData.teacherPhoto;
+        }
+        
+        // Проверяем, нужна ли кнопка "Читать дальше"
+        toggleReadMoreButton();
+    }
+    
+    function toggleReadMoreButton() {
+        const desc = document.getElementById('teacherDescription');
+        const btn = document.getElementById('readMoreBtn');
+        
+        if (desc.scrollHeight > 80) {
+            btn.style.display = 'inline-block';
+            desc.classList.add('collapsed');
+            btn.innerText = 'Читать дальше';
+        } else {
+            btn.style.display = 'none';
+            desc.classList.remove('collapsed');
+        }
+    }
+    
+    function toggleTeacherDescription() {
+        const desc = document.getElementById('teacherDescription');
+        const btn = document.getElementById('readMoreBtn');
+        
+        if (desc.classList.contains('collapsed')) {
+            desc.classList.remove('collapsed');
+            btn.innerText = 'Свернуть';
+        } else {
+            desc.classList.add('collapsed');
+            btn.innerText = 'Читать дальше';
         }
     }
     
