@@ -394,10 +394,10 @@
 <section id="about">
     <div class="container">
         <h2>Чем мы занимаемся</h2>
-        <p id="aboutDescription">Создаём хореографию в стиле contemporary.</p>
+        <p id="aboutDescription">Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.</p>
         <div style="background:#1a1a1a; border-radius:24px; padding:40px 30px; margin:40px 0; border:1px solid #2e2e2e;">
             <h3 style="color:#e63946;">О проекте</h3>
-            <p id="aboutProject">Проект направлен на развитие навыков.</p>
+            <p id="aboutProject">Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.</p>
         </div>
     </div>
 </section>
@@ -405,10 +405,19 @@
 <section class="requirements" id="why">
     <h2>Почему именно к нам?</h2>
     <ul>
-        <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия</li>
-        <li><i class="fas fa-user-check"></i> Профессиональный хореограф</li>
-        <li><i class="fas fa-users"></i> Возможность развиваться в команде</li>
+        <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия, где важнее внутреннее состояние, чем внешняя оценка</li>
+        <li><i class="fas fa-user-check"></i> Профессиональный хореограф, который помогает раскрыть индивидуальность через движение</li>
+        <li><i class="fas fa-users"></i> Возможность развиваться в команде, где каждый — часть общего творческого процесса</li>
     </ul>
+    <p style="margin-top:20px; font-style:italic;">Мы ищем увлеченных и целеустремленных танцоров, готовых присоединиться к нашему уникальному проекту по современному танцу.</p>
+    
+    <h3 style="color:#1a1a1a; margin-top:30px;">Требования к участникам:</h3>
+    <ul>
+        <li><i class="fas fa-check-circle"></i> Любовь к танцу и желание развиваться в направлении contemporary.</li>
+        <li><i class="fas fa-check-circle"></i> Готовность уделять время тренировкам и репетициям.</li>
+        <li><i class="fas fa-check-circle"></i> Открытость к новым идеям и готовность экспериментировать.</li>
+    </ul>
+    <p>Давайте вместе создадим нечто особенное!</p>
 </section>
 
 <section id="prices">
@@ -443,7 +452,7 @@
         <div class="schedule-placeholder">
             <i class="far fa-calendar-alt"></i>
             <h3 style="color:#fff;">Расписание занятий</h3>
-            <p style="color:#bbb;" id="scheduleText">Здесь скоро появится расписание.</p>
+            <p style="color:#bbb;" id="scheduleText">Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.</p>
         </div>
     </div>
 </section>
@@ -456,6 +465,7 @@
             <a href="https://t.me/tnh_project" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i> Telegram</a>
             <a href="https://instagram.com/_tnh.project_" target="_blank" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
+        <p style="text-align:center; color:#aaa;">Или просто приходите — здесь начинается танец.</p>
     </div>
 </section>
 
@@ -645,7 +655,6 @@
         siteData.teacherName = document.getElementById('editTeacherName').value;
         siteData.teacherDescription = document.getElementById('editTeacherDescription').value;
         
-        // Загружаем фото преподавателя, если выбрано
         if (teacherPhotoFile) {
             const photoUrl = await uploadTeacherPhoto(config, teacherPhotoFile);
             if (photoUrl) {
@@ -926,7 +935,6 @@
         }
     }
     
-    // Обработчик выбора фото преподавателя
     document.getElementById('teacherPhotoInput').addEventListener('change', function(e) {
         teacherPhotoFile = e.target.files[0];
         if (teacherPhotoFile) {
