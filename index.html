@@ -81,6 +81,45 @@
         }
         .manifesto p { font-size: 1.5rem; color: #fff; font-style: italic; }
         
+        .teacher-section {
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+        .teacher-card {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-radius: 24px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .teacher-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .teacher-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .teacher-info { flex: 1; }
+        .teacher-name {
+            font-size: 1.8rem;
+            color: #e63946;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .teacher-description { color: #ccc; line-height: 1.7; }
+        
+        .gallery-section {
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -144,11 +183,7 @@
             align-items: center;
         }
         .modal.active { display: flex; }
-        .modal img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-        }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 8px; }
         .modal-close {
             position: absolute;
             top: 20px;
@@ -294,22 +329,14 @@
             font-size: 0.8rem;
         }
         
-        .test-btn {
-            background: #4CAF50;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-        
         @media (max-width: 700px) {
             h1 { font-size: 2.5rem; }
             nav { display: none !important; }
             .price-card { width: 100%; max-width: 300px; }
             .gallery-grid { display: none !important; }
             .mobile-slider { display: block; }
+            .teacher-card { flex-direction: column; }
+            .teacher-photo { width: 100%; max-width: 300px; height: auto; aspect-ratio: 1; }
         }
     </style>
 </head>
@@ -319,6 +346,8 @@
     <div class="container header-inner">
         <div class="logo">TNH<span>.PROJECT</span></div>
         <nav>
+            <a href="#teacher">Преподаватель</a>
+            <a href="#gallery">Галерея</a>
             <a href="#about">О нас</a>
             <a href="#why">Почему мы</a>
             <a href="#prices">Цены</a>
@@ -343,7 +372,22 @@
     <p id="manifestoSub" style="font-size:1.1rem;">TNH.PROJECT — пространство, где танец начинается с тишины внутри</p>
 </div>
 
-<section id="gallery">
+<section id="teacher" class="teacher-section">
+    <div class="container">
+        <h2>Преподаватель</h2>
+        <div class="teacher-card">
+            <div class="teacher-photo">
+                <img id="teacherPhoto" src="" alt="Преподаватель">
+            </div>
+            <div class="teacher-info">
+                <h3 class="teacher-name" id="teacherName">Имя Фамилия</h3>
+                <p class="teacher-description" id="teacherDescription">Здесь будет информация о преподавателе.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="gallery-section">
     <div class="container">
         <h2>Галерея</h2>
         <div class="gallery-grid" id="galleryGrid"></div>
@@ -354,6 +398,8 @@
     </div>
 </section>
 
+<div style="margin-bottom: 60px;"></div>
+
 <div class="modal" id="modal" onclick="closeModal()">
     <span class="modal-close">×</span>
     <img id="modalImage" src="" alt="Просмотр">
@@ -362,10 +408,10 @@
 <section id="about">
     <div class="container">
         <h2>Чем мы занимаемся</h2>
-        <p id="aboutDescription">Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.</p>
+        <p id="aboutDescription">Создаём хореографию в стиле contemporary.</p>
         <div style="background:#1a1a1a; border-radius:24px; padding:40px 30px; margin:40px 0; border:1px solid #2e2e2e;">
             <h3 style="color:#e63946;">О проекте</h3>
-            <p id="aboutProject">Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.</p>
+            <p id="aboutProject">Проект направлен на развитие навыков.</p>
         </div>
     </div>
 </section>
@@ -373,18 +419,10 @@
 <section class="requirements" id="why">
     <h2>Почему именно к нам?</h2>
     <ul>
-        <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия, где важнее внутреннее состояние, чем внешняя оценка</li>
-        <li><i class="fas fa-user-check"></i> Профессиональный хореограф, который помогает раскрыть индивидуальность через движение</li>
-        <li><i class="fas fa-users"></i> Возможность развиваться в команде, где каждый — часть общего творческого процесса</li>
+        <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия</li>
+        <li><i class="fas fa-user-check"></i> Профессиональный хореограф</li>
+        <li><i class="fas fa-users"></i> Возможность развиваться в команде</li>
     </ul>
-    <p style="margin-top:20px; font-style:italic;">Мы ищем увлеченных и целеустремленных танцоров, готовых присоединиться к нашему уникальному проекту по современному танцу.</p>
-    <h3 style="color:#1a1a1a; margin-top:30px;">Требования к участникам:</h3>
-    <ul>
-        <li><i class="fas fa-check-circle"></i> Любовь к танцу и желание развиваться в направлении contemporary.</li>
-        <li><i class="fas fa-check-circle"></i> Готовность уделять время тренировкам и репетициям.</li>
-        <li><i class="fas fa-check-circle"></i> Открытость к новым идеям и готовность экспериментировать.</li>
-    </ul>
-    <p>Давайте вместе создадим нечто особенное!</p>
 </section>
 
 <section id="prices">
@@ -395,20 +433,14 @@
             <div class="price-card">
                 <h3>Разовое занятие</h3>
                 <div class="price">1400₽</div>
-                <div class="per-class">1 занятие</div>
-                <div class="note">Попробуй формат</div>
             </div>
             <div class="price-card">
                 <h3>Абонемент 4 занятия</h3>
                 <div class="price">4400₽</div>
-                <div class="per-class">1100₽ за занятие</div>
-                <div class="note">Экономия 1200₽</div>
             </div>
             <div class="price-card">
                 <h3>Абонемент 8 занятий</h3>
                 <div class="price">7200₽</div>
-                <div class="per-class">900₽ за занятие</div>
-                <div class="note">Экономия 4000₽</div>
             </div>
         </div>
     </div>
@@ -419,7 +451,7 @@
         <div class="schedule-placeholder">
             <i class="far fa-calendar-alt"></i>
             <h3 style="color:#fff;">Расписание занятий</h3>
-            <p style="color:#bbb;" id="scheduleText">Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.</p>
+            <p style="color:#bbb;" id="scheduleText">Здесь скоро появится расписание.</p>
         </div>
     </div>
 </section>
@@ -443,7 +475,6 @@
     <h3 style="color:#fff;">Вход в админ-панель</h3>
     <input type="password" id="passwordInput" placeholder="Пароль">
     <button class="admin-btn" onclick="checkLogin()">Войти</button>
-    <p id="loginError" style="color:#e63946; display:none;">Неверный пароль</p>
 </div>
 
 <div id="adminPanel" class="admin-panel">
@@ -466,9 +497,16 @@
     <textarea id="editAboutProject"></textarea>
     <label>Текст расписания</label>
     <textarea id="editScheduleText"></textarea>
-    <button class="admin-btn" onclick="saveTexts()">💾 Сохранить тексты</button>
     
-    <hr style="border-color:#333; margin:25px 0;">
+    <h3 style="color:#e63946;">👤 Преподаватель</h3>
+    <label>Имя преподавателя</label>
+    <input type="text" id="editTeacherName">
+    <label>Описание преподавателя</label>
+    <textarea id="editTeacherDescription"></textarea>
+    <label>Фото преподавателя (URL)</label>
+    <input type="text" id="editTeacherPhoto" placeholder="https://...">
+    
+    <button class="admin-btn" onclick="saveToGitHub()">💾 Сохранить на GitHub</button>
     
     <h3 style="color:#e63946;">🔧 Настройки GitHub</h3>
     <label>Логин GitHub</label>
@@ -479,20 +517,14 @@
     <input type="text" id="githubBranch" value="main">
     <label>GitHub токен</label>
     <input type="password" id="githubToken" placeholder="ghp_...">
-    <button class="test-btn" onclick="testConnection()">🔍 Проверить подключение</button>
-    <div id="testResult" style="color:#ccc; margin-top:10px;"></div>
     
-    <hr style="border-color:#333; margin:25px 0;">
-    
-    <h3 style="color:#e63946;">📸 Загрузка фото</h3>
+    <h3 style="color:#e63946;">📸 Фото галереи</h3>
     <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff;">
-    <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить</button>
+    <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить фото</button>
     <div id="uploadStatus" style="color:#e63946; margin-top:10px;"></div>
     
-    <h3 style="color:#e63946; margin-top:20px;">🗑️ Удаление фото</h3>
+    <h3 style="color:#e63946;">🗑️ Удаление фото</h3>
     <div class="admin-gallery" id="adminGallery"></div>
-    
-    <hr style="border-color:#333; margin:25px 0;">
     
     <button class="admin-btn secondary" onclick="logout()">Выйти</button>
 </div>
@@ -507,82 +539,165 @@
 
 <script>
     const ADMIN_PASSWORD = "1234";
-    const DEFAULT_GITHUB_USERNAME = "WebApp777"; // ← ЗАМЕНИТЕ
-    const DEFAULT_GITHUB_REPO = "contemporary"; // ← ЗАМЕНИТЕ
-    const DEFAULT_BRANCH = "main";
+    const DATA_FILE = "data.json";
     const IMAGES_FOLDER = "images/";
     
-    const defaultTexts = {
-        heroTitle: "ТУТ НЕТ ЧЕЛОВЕКА",
-        heroSubtitle: "Иногда чувства проще выразить движением, чем словами.\nИскать свой пластический язык — значит находить новый способ быть собой.",
-        heroText: "Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.",
-        manifestoQuote: "«Здесь можно не уметь. Здесь можно чувствовать».",
-        manifestoSub: "TNH.PROJECT — пространство, где танец начинается с тишины внутри",
-        aboutDescription: "Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.",
-        aboutProject: "Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.",
-        scheduleText: "Здесь скоро появится актуальное расписание.\nСледите за обновлениями или напишите нам в соцсетях."
-    };
-    
-    let currentTexts = JSON.parse(localStorage.getItem('tnh_texts')) || {...defaultTexts};
+    let siteData = {};
     let galleryImages = [];
     let currentSlide = 0;
     
     function getGithubConfig() {
         return {
-            username: localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME,
-            repo: localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO,
-            branch: localStorage.getItem('gh_branch') || DEFAULT_BRANCH,
-            token: localStorage.getItem('gh_token') || ''
+            username: document.getElementById('githubUsername').value.trim(),
+            repo: document.getElementById('githubRepo').value.trim(),
+            branch: document.getElementById('githubBranch').value.trim(),
+            token: document.getElementById('githubToken').value.trim()
         };
     }
     
-    function loadTexts() {
-        document.getElementById('heroTitle').innerText = currentTexts.heroTitle;
-        document.getElementById('heroSubtitle').innerHTML = currentTexts.heroSubtitle.replace(/\n/g, '<br>');
-        document.getElementById('heroText').innerText = currentTexts.heroText;
-        document.getElementById('manifestoQuote').innerText = currentTexts.manifestoQuote;
-        document.getElementById('manifestoSub').innerText = currentTexts.manifestoSub;
-        document.getElementById('aboutDescription').innerText = currentTexts.aboutDescription;
-        document.getElementById('aboutProject').innerText = currentTexts.aboutProject;
-        document.getElementById('scheduleText').innerHTML = currentTexts.scheduleText.replace(/\n/g, '<br>');
+    async function loadData() {
+        const username = localStorage.getItem('gh_username') || 'ВАШ_ЛОГИН';
+        const repo = localStorage.getItem('gh_repo') || 'tnh-project';
+        const branch = localStorage.getItem('gh_branch') || 'main';
+        
+        try {
+            const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${DATA_FILE}`);
+            if (response.ok) {
+                siteData = await response.json();
+                applyData();
+            } else {
+                // Используем данные по умолчанию
+                siteData = getDefaultData();
+                applyData();
+            }
+        } catch (e) {
+            siteData = getDefaultData();
+            applyData();
+        }
+        
+        loadGallery();
     }
     
-    function fillTextFields() {
-        document.getElementById('editHeroTitle').value = currentTexts.heroTitle;
-        document.getElementById('editHeroSubtitle').value = currentTexts.heroSubtitle;
-        document.getElementById('editHeroText').value = currentTexts.heroText;
-        document.getElementById('editManifestoQuote').value = currentTexts.manifestoQuote;
-        document.getElementById('editManifestoSub').value = currentTexts.manifestoSub;
-        document.getElementById('editAboutDescription').value = currentTexts.aboutDescription;
-        document.getElementById('editAboutProject').value = currentTexts.aboutProject;
-        document.getElementById('editScheduleText').value = currentTexts.scheduleText;
+    function getDefaultData() {
+        return {
+            heroTitle: "ТУТ НЕТ ЧЕЛОВЕКА",
+            heroSubtitle: "Иногда чувства проще выразить движением, чем словами.\nИскать свой пластический язык — значит находить новый способ быть собой.",
+            heroText: "Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.",
+            manifestoQuote: "«Здесь можно не уметь. Здесь можно чувствовать».",
+            manifestoSub: "TNH.PROJECT — пространство, где танец начинается с тишины внутри",
+            aboutDescription: "Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.",
+            aboutProject: "Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.",
+            scheduleText: "Здесь скоро появится актуальное расписание.\nСледите за обновлениями или напишите нам в соцсетях.",
+            teacherName: "Имя Фамилия",
+            teacherDescription: "Здесь будет информация о преподавателе.",
+            teacherPhoto: ""
+        };
     }
     
-    function saveTexts() {
-        currentTexts.heroTitle = document.getElementById('editHeroTitle').value;
-        currentTexts.heroSubtitle = document.getElementById('editHeroSubtitle').value;
-        currentTexts.heroText = document.getElementById('editHeroText').value;
-        currentTexts.manifestoQuote = document.getElementById('editManifestoQuote').value;
-        currentTexts.manifestoSub = document.getElementById('editManifestoSub').value;
-        currentTexts.aboutDescription = document.getElementById('editAboutDescription').value;
-        currentTexts.aboutProject = document.getElementById('editAboutProject').value;
-        currentTexts.scheduleText = document.getElementById('editScheduleText').value;
-        localStorage.setItem('tnh_texts', JSON.stringify(currentTexts));
-        loadTexts();
-        alert('✅ Тексты сохранены!');
+    function applyData() {
+        document.getElementById('heroTitle').innerText = siteData.heroTitle || '';
+        document.getElementById('heroSubtitle').innerHTML = (siteData.heroSubtitle || '').replace(/\n/g, '<br>');
+        document.getElementById('heroText').innerText = siteData.heroText || '';
+        document.getElementById('manifestoQuote').innerText = siteData.manifestoQuote || '';
+        document.getElementById('manifestoSub').innerText = siteData.manifestoSub || '';
+        document.getElementById('aboutDescription').innerText = siteData.aboutDescription || '';
+        document.getElementById('aboutProject').innerText = siteData.aboutProject || '';
+        document.getElementById('scheduleText').innerHTML = (siteData.scheduleText || '').replace(/\n/g, '<br>');
+        document.getElementById('teacherName').innerText = siteData.teacherName || '';
+        document.getElementById('teacherDescription').innerText = siteData.teacherDescription || '';
+        document.getElementById('teacherPhoto').src = siteData.teacherPhoto || '';
+    }
+    
+    function fillAdminFields() {
+        document.getElementById('editHeroTitle').value = siteData.heroTitle || '';
+        document.getElementById('editHeroSubtitle').value = siteData.heroSubtitle || '';
+        document.getElementById('editHeroText').value = siteData.heroText || '';
+        document.getElementById('editManifestoQuote').value = siteData.manifestoQuote || '';
+        document.getElementById('editManifestoSub').value = siteData.manifestoSub || '';
+        document.getElementById('editAboutDescription').value = siteData.aboutDescription || '';
+        document.getElementById('editAboutProject').value = siteData.aboutProject || '';
+        document.getElementById('editScheduleText').value = siteData.scheduleText || '';
+        document.getElementById('editTeacherName').value = siteData.teacherName || '';
+        document.getElementById('editTeacherDescription').value = siteData.teacherDescription || '';
+        document.getElementById('editTeacherPhoto').value = siteData.teacherPhoto || '';
+    }
+    
+    async function saveToGitHub() {
+        const config = getGithubConfig();
+        
+        if (!config.username || !config.repo || !config.token) {
+            alert('❌ Заполните настройки GitHub');
+            return;
+        }
+        
+        siteData.heroTitle = document.getElementById('editHeroTitle').value;
+        siteData.heroSubtitle = document.getElementById('editHeroSubtitle').value;
+        siteData.heroText = document.getElementById('editHeroText').value;
+        siteData.manifestoQuote = document.getElementById('editManifestoQuote').value;
+        siteData.manifestoSub = document.getElementById('editManifestoSub').value;
+        siteData.aboutDescription = document.getElementById('editAboutDescription').value;
+        siteData.aboutProject = document.getElementById('editAboutProject').value;
+        siteData.scheduleText = document.getElementById('editScheduleText').value;
+        siteData.teacherName = document.getElementById('editTeacherName').value;
+        siteData.teacherDescription = document.getElementById('editTeacherDescription').value;
+        siteData.teacherPhoto = document.getElementById('editTeacherPhoto').value;
+        
+        localStorage.setItem('gh_username', config.username);
+        localStorage.setItem('gh_repo', config.repo);
+        localStorage.setItem('gh_branch', config.branch);
+        
+        try {
+            // Проверяем, существует ли файл
+            const checkResponse = await fetch(
+                `https://api.github.com/repos/${config.username}/${config.repo}/contents/${DATA_FILE}?ref=${config.branch}`,
+                { headers: { 'Authorization': `token ${config.token}` } }
+            );
+            
+            const content = JSON.stringify(siteData, null, 2);
+            const base64 = btoa(unescape(encodeURIComponent(content)));
+            
+            let body = {
+                message: 'Update site data',
+                content: base64,
+                branch: config.branch
+            };
+            
+            if (checkResponse.ok) {
+                const existing = await checkResponse.json();
+                body.sha = existing.sha;
+            }
+            
+            const response = await fetch(
+                `https://api.github.com/repos/${config.username}/${config.repo}/contents/${DATA_FILE}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${config.token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body)
+                }
+            );
+            
+            if (response.ok) {
+                alert('✅ Данные сохранены!');
+                applyData();
+            } else {
+                const error = await response.json();
+                alert(`❌ Ошибка: ${error.message}`);
+            }
+        } catch (err) {
+            alert('❌ Ошибка сети');
+        }
     }
     
     async function loadGallery() {
-        const config = getGithubConfig();
+        const username = localStorage.getItem('gh_username') || 'ВАШ_ЛОГИН';
+        const repo = localStorage.getItem('gh_repo') || 'tnh-project';
+        const branch = localStorage.getItem('gh_branch') || 'main';
         
         try {
-            const headers = {};
-            if (config.token) {
-                headers['Authorization'] = `token ${config.token}`;
-            }
-            
-            const response = await fetch(`https://api.github.com/repos/${config.username}/${config.repo}/contents/${IMAGES_FOLDER}?ref=${config.branch}`, { headers });
-            
+            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${IMAGES_FOLDER}?ref=${branch}`);
             if (response.ok) {
                 const files = await response.json();
                 galleryImages = files
@@ -596,12 +711,8 @@
                 renderGallery();
                 renderMobileSlider();
                 renderAdminGallery();
-            } else {
-                document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">Фото скоро появятся</div>';
             }
-        } catch (e) {
-            document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">Галерея загружается...</div>';
-        }
+        } catch (e) {}
     }
     
     function renderGallery() {
@@ -619,13 +730,10 @@
     
     function renderMobileSlider() {
         const slider = document.getElementById('mobileSlider');
-        const existingImages = slider.querySelectorAll('img');
-        existingImages.forEach(img => img.remove());
-        
+        slider.querySelectorAll('img').forEach(img => img.remove());
         galleryImages.forEach((img, index) => {
             const imgEl = document.createElement('img');
             imgEl.src = img.url;
-            imgEl.alt = 'Dance';
             imgEl.className = index === 0 ? 'active' : '';
             imgEl.onclick = () => openModal(img.url);
             slider.appendChild(imgEl);
@@ -661,13 +769,10 @@
     
     async function deleteImage(path, sha) {
         const config = getGithubConfig();
-        const token = document.getElementById('githubToken').value.trim() || config.token;
-        
-        if (!token) {
+        if (!config.token) {
             alert('❌ Введите GitHub токен');
             return;
         }
-        
         if (!confirm('Удалить это фото?')) return;
         
         try {
@@ -676,27 +781,20 @@
                 {
                     method: 'DELETE',
                     headers: {
-                        'Authorization': `token ${token}`,
+                        'Authorization': `token ${config.token}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        message: `Delete photo ${path}`,
+                        message: `Delete photo`,
                         sha: sha,
                         branch: config.branch
                     })
                 }
             );
-            
             if (response.ok) {
-                alert('✅ Фото удалено');
                 loadGallery();
-            } else {
-                const error = await response.json();
-                alert(`❌ Ошибка: ${error.message}`);
             }
-        } catch (err) {
-            alert('❌ Ошибка сети');
-        }
+        } catch (err) {}
     }
     
     function showLogin() {
@@ -704,77 +802,31 @@
     }
     
     function checkLogin() {
-        const password = document.getElementById('passwordInput').value;
-        if (password === ADMIN_PASSWORD) {
+        if (document.getElementById('passwordInput').value === ADMIN_PASSWORD) {
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('adminPanel').classList.add('active');
-            fillTextFields();
-            const config = getGithubConfig();
-            document.getElementById('githubUsername').value = config.username;
-            document.getElementById('githubRepo').value = config.repo;
-            document.getElementById('githubBranch').value = config.branch;
-            document.getElementById('githubToken').value = config.token;
-            renderAdminGallery();
-        } else {
-            document.getElementById('loginError').style.display = 'block';
+            fillAdminFields();
+            document.getElementById('githubUsername').value = localStorage.getItem('gh_username') || '';
+            document.getElementById('githubRepo').value = localStorage.getItem('gh_repo') || '';
+            document.getElementById('githubBranch').value = localStorage.getItem('gh_branch') || 'main';
         }
     }
     
     function logout() {
         document.getElementById('adminPanel').classList.remove('active');
-        document.getElementById('passwordInput').value = '';
-    }
-    
-    async function testConnection() {
-        const username = document.getElementById('githubUsername').value.trim();
-        const repo = document.getElementById('githubRepo').value.trim();
-        const branch = document.getElementById('githubBranch').value.trim();
-        const token = document.getElementById('githubToken').value.trim();
-        const result = document.getElementById('testResult');
-        
-        // Сохраняем настройки
-        localStorage.setItem('gh_username', username);
-        localStorage.setItem('gh_repo', repo);
-        localStorage.setItem('gh_branch', branch);
-        localStorage.setItem('gh_token', token);
-        
-        result.textContent = '⏳ Проверяем...';
-        
-        try {
-            const response = await fetch(`https://api.github.com/repos/${username}/${repo}`, {
-                headers: token ? { 'Authorization': `token ${token}` } : {}
-            });
-            
-            if (response.ok) {
-                result.textContent = '✅ Подключение успешно!';
-            } else {
-                const error = await response.json();
-                result.textContent = `❌ Ошибка: ${error.message}`;
-            }
-        } catch (err) {
-            result.textContent = '❌ Ошибка сети';
-        }
     }
     
     async function uploadToGitHub() {
-        const username = document.getElementById('githubUsername').value.trim();
-        const repo = document.getElementById('githubRepo').value.trim();
-        const branch = document.getElementById('githubBranch').value.trim();
-        const token = document.getElementById('githubToken').value.trim();
+        const config = getGithubConfig();
         const files = document.getElementById('fileInput').files;
         const status = document.getElementById('uploadStatus');
         
-        localStorage.setItem('gh_username', username);
-        localStorage.setItem('gh_repo', repo);
-        localStorage.setItem('gh_branch', branch);
-        localStorage.setItem('gh_token', token);
+        localStorage.setItem('gh_username', config.username);
+        localStorage.setItem('gh_repo', config.repo);
+        localStorage.setItem('gh_branch', config.branch);
         
-        if (!username || !repo) {
-            status.textContent = '❌ Укажите логин и репозиторий';
-            return;
-        }
-        if (!token) {
-            status.textContent = '❌ Введите GitHub токен';
+        if (!config.username || !config.repo || !config.token) {
+            status.textContent = '❌ Заполните настройки GitHub';
             return;
         }
         if (files.length === 0) {
@@ -782,48 +834,41 @@
             return;
         }
         
-        status.textContent = '⏳ Загружаем...';
-        
         for (let file of files) {
             const reader = new FileReader();
             reader.onload = async function(e) {
                 const base64 = e.target.result.split(',')[1];
                 const filename = Date.now() + '-' + file.name.replace(/[^\w.-]/g, '-');
                 
-                try {
-                    const response = await fetch(
-                        `https://api.github.com/repos/${username}/${repo}/contents/${IMAGES_FOLDER}${filename}`,
-                        {
-                            method: 'PUT',
-                            headers: {
-                                'Authorization': `token ${token}`,
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                message: `Add photo ${filename}`,
-                                content: base64,
-                                branch: branch
-                            })
-                        }
-                    );
-                    
-                    if (response.ok) {
-                        status.textContent = `✅ ${file.name} загружен!`;
-                        setTimeout(loadGallery, 2000);
-                    } else {
-                        const error = await response.json();
-                        status.textContent = `❌ Ошибка: ${error.message}`;
+                const response = await fetch(
+                    `https://api.github.com/repos/${config.username}/${config.repo}/contents/${IMAGES_FOLDER}${filename}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${config.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: `Add photo`,
+                            content: base64,
+                            branch: config.branch
+                        })
                     }
-                } catch (err) {
-                    status.textContent = '❌ Ошибка сети';
+                );
+                
+                if (response.ok) {
+                    status.textContent = `✅ ${file.name} загружен!`;
+                    loadGallery();
+                } else {
+                    const error = await response.json();
+                    status.textContent = `❌ ${error.message}`;
                 }
             };
             reader.readAsDataURL(file);
         }
     }
     
-    loadTexts();
-    loadGallery();
+    loadData();
 </script>
 </body>
 </html>
