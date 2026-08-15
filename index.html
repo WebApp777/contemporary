@@ -81,10 +81,7 @@
         }
         .manifesto p { font-size: 1.5rem; color: #fff; font-style: italic; }
         
-        .teacher-section {
-            padding: 40px 0;
-            margin: 40px 0;
-        }
+        .teacher-section { padding: 40px 0; margin: 40px 0; }
         .teacher-card {
             display: flex;
             gap: 30px;
@@ -101,12 +98,9 @@
             border-radius: 16px;
             overflow: hidden;
             flex-shrink: 0;
+            background: #1a1a1a;
         }
-        .teacher-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .teacher-photo img { width: 100%; height: 100%; object-fit: cover; }
         .teacher-info { flex: 1; }
         .teacher-name {
             font-size: 1.8rem;
@@ -116,10 +110,7 @@
         }
         .teacher-description { color: #ccc; line-height: 1.7; }
         
-        .gallery-section {
-            padding: 40px 0;
-            margin-bottom: 40px;
-        }
+        .gallery-section { padding: 40px 0; margin-bottom: 40px; }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -146,12 +137,7 @@
             border-radius: 16px;
             aspect-ratio: 1;
         }
-        .mobile-slider img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
+        .mobile-slider img { width: 100%; height: 100%; object-fit: cover; display: none; }
         .mobile-slider img.active { display: block; }
         .slider-btn {
             position: absolute;
@@ -433,14 +419,20 @@
             <div class="price-card">
                 <h3>Разовое занятие</h3>
                 <div class="price">1400₽</div>
+                <div class="per-class">1 занятие</div>
+                <div class="note">Попробуй формат</div>
             </div>
             <div class="price-card">
                 <h3>Абонемент 4 занятия</h3>
                 <div class="price">4400₽</div>
+                <div class="per-class">1100₽ за занятие</div>
+                <div class="note">Экономия 1200₽</div>
             </div>
             <div class="price-card">
                 <h3>Абонемент 8 занятий</h3>
                 <div class="price">7200₽</div>
+                <div class="per-class">900₽ за занятие</div>
+                <div class="note">Экономия 4000₽</div>
             </div>
         </div>
     </div>
@@ -503,8 +495,9 @@
     <input type="text" id="editTeacherName">
     <label>Описание преподавателя</label>
     <textarea id="editTeacherDescription"></textarea>
-    <label>Фото преподавателя (URL)</label>
-    <input type="text" id="editTeacherPhoto" placeholder="https://...">
+    <label>Фото преподавателя (загрузить файл)</label>
+    <input type="file" id="teacherPhotoInput" accept="image/*" style="color:#fff;">
+    <div id="teacherPhotoPreview" style="margin:10px 0;"></div>
     
     <button class="admin-btn" onclick="saveToGitHub()">💾 Сохранить на GitHub</button>
     
@@ -545,6 +538,7 @@
     let siteData = {};
     let galleryImages = [];
     let currentSlide = 0;
+    let teacherPhotoFile = null;
     
     function getGithubConfig() {
         return {
@@ -555,26 +549,30 @@
         };
     }
     
+    function getStoredConfig() {
+        return {
+            username: localStorage.getItem('gh_username') || 'ВАШ_ЛОГИН',
+            repo: localStorage.getItem('gh_repo') || 'tnh-project',
+            branch: localStorage.getItem('gh_branch') || 'main',
+            token: localStorage.getItem('gh_token') || ''
+        };
+    }
+    
     async function loadData() {
-        const username = localStorage.getItem('gh_username') || 'ВАШ_ЛОГИН';
-        const repo = localStorage.getItem('gh_repo') || 'tnh-project';
-        const branch = localStorage.getItem('gh_branch') || 'main';
+        const config = getStoredConfig();
         
         try {
-            const response = await fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${DATA_FILE}`);
+            const response = await fetch(`https://raw.githubusercontent.com/${config.username}/${config.repo}/${config.branch}/${DATA_FILE}`);
             if (response.ok) {
                 siteData = await response.json();
-                applyData();
             } else {
-                // Используем данные по умолчанию
                 siteData = getDefaultData();
-                applyData();
             }
         } catch (e) {
             siteData = getDefaultData();
-            applyData();
         }
         
+        applyData();
         loadGallery();
     }
     
@@ -605,7 +603,9 @@
         document.getElementById('scheduleText').innerHTML = (siteData.scheduleText || '').replace(/\n/g, '<br>');
         document.getElementById('teacherName').innerText = siteData.teacherName || '';
         document.getElementById('teacherDescription').innerText = siteData.teacherDescription || '';
-        document.getElementById('teacherPhoto').src = siteData.teacherPhoto || '';
+        if (siteData.teacherPhoto) {
+            document.getElementById('teacherPhoto').src = siteData.teacherPhoto;
+        }
     }
     
     function fillAdminFields() {
@@ -619,7 +619,11 @@
         document.getElementById('editScheduleText').value = siteData.scheduleText || '';
         document.getElementById('editTeacherName').value = siteData.teacherName || '';
         document.getElementById('editTeacherDescription').value = siteData.teacherDescription || '';
-        document.getElementById('editTeacherPhoto').value = siteData.teacherPhoto || '';
+        
+        if (siteData.teacherPhoto) {
+            document.getElementById('teacherPhotoPreview').innerHTML = 
+                `<img src="${siteData.teacherPhoto}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;">`;
+        }
     }
     
     async function saveToGitHub() {
@@ -640,14 +644,23 @@
         siteData.scheduleText = document.getElementById('editScheduleText').value;
         siteData.teacherName = document.getElementById('editTeacherName').value;
         siteData.teacherDescription = document.getElementById('editTeacherDescription').value;
-        siteData.teacherPhoto = document.getElementById('editTeacherPhoto').value;
+        
+        // Загружаем фото преподавателя, если выбрано
+        if (teacherPhotoFile) {
+            const photoUrl = await uploadTeacherPhoto(config, teacherPhotoFile);
+            if (photoUrl) {
+                siteData.teacherPhoto = photoUrl;
+            }
+            teacherPhotoFile = null;
+            document.getElementById('teacherPhotoInput').value = '';
+        }
         
         localStorage.setItem('gh_username', config.username);
         localStorage.setItem('gh_repo', config.repo);
         localStorage.setItem('gh_branch', config.branch);
+        localStorage.setItem('gh_token', config.token);
         
         try {
-            // Проверяем, существует ли файл
             const checkResponse = await fetch(
                 `https://api.github.com/repos/${config.username}/${config.repo}/contents/${DATA_FILE}?ref=${config.branch}`,
                 { headers: { 'Authorization': `token ${config.token}` } }
@@ -691,13 +704,55 @@
         }
     }
     
+    async function uploadTeacherPhoto(config, file) {
+        const reader = new FileReader();
+        
+        return new Promise((resolve) => {
+            reader.onload = async function(e) {
+                const base64 = e.target.result.split(',')[1];
+                const filename = 'teacher-' + Date.now() + '-' + file.name.replace(/[^\w.-]/g, '-');
+                
+                const response = await fetch(
+                    `https://api.github.com/repos/${config.username}/${config.repo}/contents/${IMAGES_FOLDER}${filename}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${config.token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: 'Upload teacher photo',
+                            content: base64,
+                            branch: config.branch
+                        })
+                    }
+                );
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resolve(data.content.download_url);
+                } else {
+                    resolve(null);
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    
     async function loadGallery() {
-        const username = localStorage.getItem('gh_username') || 'ВАШ_ЛОГИН';
-        const repo = localStorage.getItem('gh_repo') || 'tnh-project';
-        const branch = localStorage.getItem('gh_branch') || 'main';
+        const config = getStoredConfig();
         
         try {
-            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${IMAGES_FOLDER}?ref=${branch}`);
+            const headers = {};
+            if (config.token) {
+                headers['Authorization'] = `token ${config.token}`;
+            }
+            
+            const response = await fetch(
+                `https://api.github.com/repos/${config.username}/${config.repo}/contents/${IMAGES_FOLDER}?ref=${config.branch}`,
+                { headers }
+            );
+            
             if (response.ok) {
                 const files = await response.json();
                 galleryImages = files
@@ -785,7 +840,7 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        message: `Delete photo`,
+                        message: 'Delete photo',
                         sha: sha,
                         branch: config.branch
                     })
@@ -806,9 +861,11 @@
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('adminPanel').classList.add('active');
             fillAdminFields();
-            document.getElementById('githubUsername').value = localStorage.getItem('gh_username') || '';
-            document.getElementById('githubRepo').value = localStorage.getItem('gh_repo') || '';
-            document.getElementById('githubBranch').value = localStorage.getItem('gh_branch') || 'main';
+            const config = getStoredConfig();
+            document.getElementById('githubUsername').value = config.username;
+            document.getElementById('githubRepo').value = config.repo;
+            document.getElementById('githubBranch').value = config.branch;
+            document.getElementById('githubToken').value = config.token;
         }
     }
     
@@ -824,6 +881,7 @@
         localStorage.setItem('gh_username', config.username);
         localStorage.setItem('gh_repo', config.repo);
         localStorage.setItem('gh_branch', config.branch);
+        localStorage.setItem('gh_token', config.token);
         
         if (!config.username || !config.repo || !config.token) {
             status.textContent = '❌ Заполните настройки GitHub';
@@ -849,7 +907,7 @@
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            message: `Add photo`,
+                            message: 'Add photo',
                             content: base64,
                             branch: config.branch
                         })
@@ -867,6 +925,19 @@
             reader.readAsDataURL(file);
         }
     }
+    
+    // Обработчик выбора фото преподавателя
+    document.getElementById('teacherPhotoInput').addEventListener('change', function(e) {
+        teacherPhotoFile = e.target.files[0];
+        if (teacherPhotoFile) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('teacherPhotoPreview').innerHTML = 
+                    `<img src="${event.target.result}" style="width:100px;height:100px;object-fit:cover;border-radius:8px;">`;
+            };
+            reader.readAsDataURL(teacherPhotoFile);
+        }
+    });
     
     loadData();
 </script>
