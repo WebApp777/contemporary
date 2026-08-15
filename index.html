@@ -21,6 +21,7 @@
         h3 { font-size: 1.4rem; color: #ffffff; margin-bottom: 16px; }
         p { color: #d0d0d0; margin-bottom: 1.2rem; font-size: 1.1rem; }
         
+        /* ШАПКА С МЕНЮ */
         header {
             background: #0a0a0a;
             border-bottom: 2px solid #2a2a2a;
@@ -29,14 +30,37 @@
             top: 0;
             z-index: 100;
         }
-        .header-inner { display: flex; justify-content: center; }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
         .logo { font-size: 1.9rem; font-weight: 700; letter-spacing: 4px; color: #fff; }
         .logo span { color: #e63946; }
+        nav { display: flex; align-items: center; }
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 28px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+        nav a:hover { color: #e63946; }
+        .admin-link {
+            color: #e63946 !important;
+            font-weight: 600;
+            cursor: pointer;
+        }
         
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero { padding: 70px 0 50px; text-align: center; background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%); }
         .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
         .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 1.3rem; color: #d4d4d4; font-style: italic; }
-        
         .btn-red {
             display: inline-block;
             background: #e63946;
@@ -63,15 +87,85 @@
         }
         .manifesto p { font-size: 1.5rem; color: #fff; font-style: italic; }
         
+        /* ГАЛЕРЕЯ */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 30px;
         }
-        .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 1; }
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            position: relative;
+        }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
         .gallery-empty { grid-column: 1 / -1; text-align: center; color: #888; padding: 30px; border: 2px dashed #3a3a3a; border-radius: 16px; }
+        
+        /* СЛАЙДЕР ДЛЯ МОБИЛЬНЫХ */
+        .mobile-slider {
+            display: none;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+            overflow: hidden;
+            border-radius: 16px;
+            aspect-ratio: 1;
+        }
+        .mobile-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .mobile-slider img.active { display: block; }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+        
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
         
         .requirements {
             background: #fff;
@@ -178,19 +272,61 @@
         .admin-trigger { text-align: center; margin: 40px 0; }
         .admin-trigger a { color: #e63946; cursor: pointer; text-decoration: underline; }
         
+        /* Админ-галерея с удалением */
+        .admin-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .admin-gallery-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .admin-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .delete-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
         @media (max-width: 700px) {
             h1 { font-size: 2.5rem; }
+            nav { display: none !important; }
             .price-card { width: 100%; max-width: 300px; }
-            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .gallery-grid { display: none !important; }
+            .mobile-slider { display: block; }
         }
     </style>
 </head>
 <body>
 
-<!-- ШАПКА -->
+<!-- ШАПКА С МЕНЮ (видна на ПК) -->
 <header>
     <div class="container header-inner">
         <div class="logo">TNH<span>.PROJECT</span></div>
+        <nav>
+            <a href="#about">О нас</a>
+            <a href="#why">Почему мы</a>
+            <a href="#prices">Цены</a>
+            <a href="#schedule">Расписание</a>
+            <a href="#contact">Контакты</a>
+            <a class="admin-link" onclick="showLogin()"><i class="fas fa-lock"></i> Админ</a>
+        </nav>
     </div>
 </header>
 
@@ -214,9 +350,21 @@
 <section id="gallery">
     <div class="container">
         <h2>Галерея</h2>
+        <!-- ПК версия -->
         <div class="gallery-grid" id="galleryGrid"></div>
+        <!-- Мобильная версия (слайдер) -->
+        <div class="mobile-slider" id="mobileSlider">
+            <button class="slider-btn prev" onclick="changeSlide(-1)">❮</button>
+            <button class="slider-btn next" onclick="changeSlide(1)">❯</button>
+        </div>
     </div>
 </section>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+<div class="modal" id="modal" onclick="closeModal()">
+    <span class="modal-close">×</span>
+    <img id="modalImage" src="" alt="Просмотр">
+</div>
 
 <!-- ЧЕМ ЗАНИМАЕМСЯ -->
 <section id="about">
@@ -299,7 +447,7 @@
     </div>
 </section>
 
-<!-- ВХОД ДЛЯ АДМИНА -->
+<!-- ВХОД ДЛЯ АДМИНА (для мобильных) -->
 <div class="admin-trigger">
     <a onclick="showLogin()"><i class="fas fa-lock"></i> Вход для администратора</a>
 </div>
@@ -316,7 +464,6 @@
 <div id="adminPanel" class="admin-panel">
     <h2>Управление сайтом</h2>
     
-    <!-- ТЕКСТОВЫЕ НАСТРОЙКИ -->
     <h3 style="color:#e63946;">📝 Тексты</h3>
     <label>Заголовок (HERO)</label>
     <input type="text" id="editHeroTitle">
@@ -338,7 +485,6 @@
     
     <hr style="border-color:#333; margin:25px 0;">
     
-    <!-- НАСТРОЙКИ GITHUB -->
     <h3 style="color:#e63946;">🔧 Настройки GitHub</h3>
     <label>Логин GitHub</label>
     <input type="text" id="githubUsername" placeholder="ваш_логин">
@@ -351,11 +497,13 @@
     
     <hr style="border-color:#333; margin:25px 0;">
     
-    <!-- ЗАГРУЗКА ФОТО -->
     <h3 style="color:#e63946;">📸 Загрузка фото</h3>
     <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff;">
-    <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить на GitHub</button>
+    <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить</button>
     <div id="uploadStatus" style="color:#e63946; margin-top:10px;"></div>
+    
+    <h3 style="color:#e63946; margin-top:20px;">🗑️ Удаление фото</h3>
+    <div class="admin-gallery" id="adminGallery"></div>
     
     <hr style="border-color:#333; margin:25px 0;">
     
@@ -372,13 +520,12 @@
 
 <script>
     // === НАСТРОЙКИ ===
-    const ADMIN_PASSWORD = "1234"; // ← пароль
-    const DEFAULT_GITHUB_USERNAME = "WebApp777"; 
-    const DEFAULT_GITHUB_REPO = "contemporary"; 
+    const ADMIN_PASSWORD = "1234";
+    const DEFAULT_GITHUB_USERNAME = "WebApp777"; // ← ЗАМЕНИТЕ
+    const DEFAULT_GITHUB_REPO = "contemporary"; // ← ЗАМЕНИТЕ
     const DEFAULT_BRANCH = "main";
     const IMAGES_FOLDER = "images/";
     
-    // Тексты по умолчанию
     const defaultTexts = {
         heroTitle: "ТУТ НЕТ ЧЕЛОВЕКА",
         heroSubtitle: "Иногда чувства проще выразить движением, чем словами.\nИскать свой пластический язык — значит находить новый способ быть собой.",
@@ -392,6 +539,7 @@
     
     let currentTexts = JSON.parse(localStorage.getItem('tnh_texts')) || {...defaultTexts};
     let galleryImages = [];
+    let currentSlide = 0;
     
     // === ЗАГРУЗКА ТЕКСТОВ ===
     function loadTexts() {
@@ -442,15 +590,20 @@
                 const files = await response.json();
                 galleryImages = files
                     .filter(file => file.name.match(/\.(jpg|jpeg|png|gif|webp)$/i))
-                    .map(file => file.download_url);
+                    .map(file => ({
+                        url: file.download_url,
+                        name: file.name,
+                        path: file.path,
+                        sha: file.sha
+                    }));
                 renderGallery();
+                renderMobileSlider();
+                renderAdminGallery();
             } else {
-                document.getElementById('galleryGrid').innerHTML = 
-                    '<div class="gallery-empty">Фото скоро появятся</div>';
+                document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">Фото скоро появятся</div>';
             }
         } catch (e) {
-            document.getElementById('galleryGrid').innerHTML = 
-                '<div class="gallery-empty">Галерея загружается...</div>';
+            document.getElementById('galleryGrid').innerHTML = '<div class="gallery-empty">Галерея загружается...</div>';
         }
     }
     
@@ -459,9 +612,97 @@
         if (galleryImages.length === 0) {
             grid.innerHTML = '<div class="gallery-empty">Фото скоро появятся</div>';
         } else {
-            grid.innerHTML = galleryImages.map(img => 
-                `<div class="gallery-item"><img src="${img}" alt="Dance" loading="lazy"></div>`
+            grid.innerHTML = galleryImages.map((img, index) => 
+                `<div class="gallery-item" onclick="openModal('${img.url}')">
+                    <img src="${img.url}" alt="Dance" loading="lazy">
+                </div>`
             ).join('');
+        }
+    }
+    
+    function renderMobileSlider() {
+        const slider = document.getElementById('mobileSlider');
+        const existingImages = slider.querySelectorAll('img');
+        existingImages.forEach(img => img.remove());
+        
+        galleryImages.forEach((img, index) => {
+            const imgEl = document.createElement('img');
+            imgEl.src = img.url;
+            imgEl.alt = 'Dance';
+            imgEl.className = index === 0 ? 'active' : '';
+            imgEl.onclick = () => openModal(img.url);
+            slider.appendChild(imgEl);
+        });
+    }
+    
+    function renderAdminGallery() {
+        const container = document.getElementById('adminGallery');
+        container.innerHTML = galleryImages.map((img, index) => 
+            `<div class="admin-gallery-item">
+                <img src="${img.url}" alt="${img.name}">
+                <button class="delete-btn" onclick="deleteImage('${img.path}', '${img.sha}')">×</button>
+            </div>`
+        ).join('');
+    }
+    
+    function changeSlide(direction) {
+        const images = document.querySelectorAll('#mobileSlider img');
+        if (images.length === 0) return;
+        
+        images[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + direction + images.length) % images.length;
+        images[currentSlide].classList.add('active');
+    }
+    
+    function openModal(url) {
+        document.getElementById('modalImage').src = url;
+        document.getElementById('modal').classList.add('active');
+    }
+    
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+    }
+    
+    // === УДАЛЕНИЕ ФОТО ===
+    async function deleteImage(path, sha) {
+        const username = localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
+        const repo = localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
+        const branch = localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
+        const token = document.getElementById('githubToken').value.trim();
+        
+        if (!token) {
+            alert('❌ Введите GitHub токен');
+            return;
+        }
+        
+        if (!confirm('Удалить это фото?')) return;
+        
+        try {
+            const response = await fetch(
+                `https://api.github.com/repos/${username}/${repo}/contents/${path}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `token ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: `Delete photo ${path}`,
+                        sha: sha,
+                        branch: branch
+                    })
+                }
+            );
+            
+            if (response.ok) {
+                alert('✅ Фото удалено');
+                loadGallery();
+            } else {
+                const error = await response.json();
+                alert(`❌ Ошибка: ${error.message}`);
+            }
+        } catch (err) {
+            alert('❌ Ошибка сети');
         }
     }
     
@@ -479,6 +720,7 @@
             document.getElementById('githubUsername').value = localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
             document.getElementById('githubRepo').value = localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
             document.getElementById('githubBranch').value = localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
+            renderAdminGallery();
         } else {
             document.getElementById('loginError').style.display = 'block';
         }
