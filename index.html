@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TNH.PROJECT — пространство, где танец начинается с тишины внутри</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #eaeaea;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 32px;
+            border-left: 5px solid #e63946;
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: #d0d0d0;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        header {
+            background: #0a0a0a;
+            border-bottom: 2px solid #2a2a2a;
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin: 0 auto;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 28px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #e63946;
+        }
+
+        .admin-link {
+            color: #e63946 !important;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .hero {
+            padding: 70px 0 50px;
+            text-align: center;
+            background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.3rem;
+            color: #d4d4d4;
+            font-style: italic;
+        }
+
+        .btn-red {
+            display: inline-block;
+            background-color: #e63946;
+            color: #ffffff;
+            padding: 14px 36px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.25s;
+            border: 1px solid #e63946;
+            margin-top: 10px;
+        }
+
+        .btn-red:hover {
+            background-color: #b71c2c;
+        }
+
+        .manifesto {
+            background: #111;
+            border-left: 8px solid #e63946;
+            border-right: 8px solid #e63946;
+            padding: 40px 30px;
+            margin: 50px auto;
+            border-radius: 50px 10px 50px 10px;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        .manifesto p {
+            font-size: 1.5rem;
+            color: #fff;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .gallery-section {
+            padding: 40px 0 10px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            border: 2px dashed #3a3a3a;
+            border-radius: 16px;
+        }
+
+        .requirements {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 30px;
+            margin: 40px auto;
+            max-width: 950px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .requirements h2 {
+            color: #1a1a1a;
+            border-left-color: #e63946;
+        }
+
+        .requirements ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .requirements li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .requirements li i {
+            color: #e63946;
+            width: 22px;
+        }
+
+        .requirements p {
+            color: #333;
+        }
+
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .price-card {
+            background: #161616;
+            border: 1px solid #3a3a3a;
+            border-radius: 25px;
+            padding: 30px 25px;
+            width: 260px;
+            text-align: center;
+            transition: 0.25s;
+        }
+
+        .price-card h3 {
+            color: #e63946;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 10px 0;
+        }
+
+        .price-card .per-class {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .price-card .note {
+            color: #8f8f8f;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        .schedule-placeholder {
+            background: #101010;
+            border: 2px dashed #e63946;
+            border-radius: 30px;
+            padding: 60px 30px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 800px;
+            color: #ccc;
+        }
+
+        .schedule-placeholder i {
+            font-size: 3rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1a1a1a;
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid #3a3a3a;
+            transition: 0.2s;
+        }
+
+        .social-link i {
+            font-size: 1.5rem;
+            color: #e63946;
+        }
+
+        .social-link:hover {
+            border-color: #e63946;
+            background: #222;
+            color: #fff;
+        }
+
+        footer {
+            background: #050505;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #2a2a2a;
+            color: #777;
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            color: #e63946;
+            letter-spacing: 2px;
+        }
+
+        .admin-panel {
+            background: #111;
+            border: 2px solid #e63946;
+            border-radius: 30px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 800px;
+            display: none;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-panel input,
+        .admin-panel textarea {
+            width: 100%;
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .admin-panel textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-panel label {
+            color: #ccc;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .admin-btn {
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .admin-btn.secondary {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+
+        .admin-btn:hover {
+            background-color: #b71c2c;
+        }
+
+        .admin-image-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .admin-image-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #555;
+            cursor: pointer;
+        }
+
+        .login-form {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .login-form input {
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Кнопка входа внизу (для мобильных) */
+        .mobile-admin-trigger {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .mobile-admin-trigger a {
+            color: #e63946;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-inner {
+                flex-direction: column;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            .btn-red {
+                padding: 12px 25px;
+            }
+
+            .price-card {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ШАПКА -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">TNH<span>.PROJECT</span></div>
+            <nav>
+                <a href="#about">О нас</a>
+                <a href="#why">Почему мы</a>
+                <a href="#prices">Цены</a>
+                <a href="#schedule">Расписание</a>
+                <a href="#contact">Контакты</a>
+                <span class="admin-link" onclick="showLogin()"><i class="fas fa-lock"></i> Админ</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <div class="container">
+            <h1 id="heroTitle">ТУТ НЕТ ЧЕЛОВЕКА</h1>
+            <p id="heroSubtitle">Иногда чувства проще выразить движением, чем словами.<br>Искать свой пластический язык
+                — значит находить новый способ быть собой.</p>
+            <p id="heroText" style="font-size:1.1rem;">Если contemporary для вас — это диалог тела и души, а танец —
+                пространство свободы, мы приглашаем вас в нашу команду.</p>
+            <a href="#contact" class="btn-red">Присоединиться</a>
+        </div>
+    </section>
+
+    <!-- МАНИФЕСТ -->
+    <div class="container manifesto">
+        <p id="manifestoQuote">«Здесь можно не уметь. Здесь можно чувствовать».</p>
+        <p id="manifestoSub" style="font-size:1.1rem;">TNH.PROJECT — пространство, где танец начинается с тишины внутри
+        </p>
+    </div>
+
+    <!-- ГАЛЕРЕЯ -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2>Галерея</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- ЧЕМ ЗАНИМАЕМСЯ -->
+    <section class="section-about" id="about">
+        <div class="container">
+            <h2>Чем мы занимаемся</h2>
+            <p id="aboutDescription"></p>
+            <div class="gray-bg">
+                <h3 style="color:#e63946;">О проекте</h3>
+                <p id="aboutProject"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОЧЕМУ МЫ -->
+    <section class="requirements" id="why">
+        <h2>Почему именно к нам?</h2>
+        <ul id="whyList"></ul>
+        <p id="whyExtra" style="margin-top:20px; font-style:italic;"></p>
+        <h3 style="color:#1a1a1a; margin-top:30px;">Требования к участникам:</h3>
+        <ul id="requirementsList"></ul>
+        <p id="requirementsEnd"></p>
+    </section>
+
+    <!-- ЦЕНЫ -->
+    <section id="prices">
+        <div class="container">
+            <h2>Цены</h2>
+            <p style="text-align:center; color:#ccc;">Длительность занятия — 90 минут</p>
+            <div class="pricing-grid" id="pricingGrid"></div>
+        </div>
+    </section>
+
+    <!-- РАСПИСАНИЕ -->
+    <section id="schedule">
+        <div class="container">
+            <div class="schedule-placeholder">
+                <i class="far fa-calendar-alt"></i>
+                <h3 style="color:#fff;">Расписание занятий</h3>
+                <p style="color:#bbb;" id="scheduleText"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="contact">
+        <div class="container">
+            <h2>Мы в соцсетях</h2>
+            <div class="social-links">
+                <a href="https://vk.ru/tnh.project" target="_blank" class="social-link"><i class="fab fa-vk"></i> VK</a>
+                <a href="https://t.me/tnh_project" target="_blank" class="social-link"><i
+                        class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://instagram.com/_tnh.project_" target="_blank" class="social-link"><i
+                        class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            <p style="text-align:center; color:#aaa;">Или просто приходите — здесь начинается танец.</p>
+        </div>
+    </section>
+
+    <!-- КНОПКА ВХОДА ДЛЯ МОБИЛЬНЫХ (видна всегда) -->
+    <div class="mobile-admin-trigger">
+        <a onclick="showLogin()"><i class="fas fa-lock"></i> Вход для администратора</a>
+    </div>
+
+    <!-- ФОРМА ВХОДА -->
+    <div id="loginFormContainer" class="login-form hidden">
+        <h3 style="color:#fff; margin-bottom:20px;">Вход в админ-панель</h3>
+        <input type="text" id="loginInput" placeholder="Логин" value="admin">
+        <input type="password" id="passwordInput" placeholder="Пароль" value="1234">
+        <button class="admin-btn" onclick="checkLogin()">Войти</button>
+        <button class="admin-btn secondary" onclick="hideLogin()">Отмена</button>
+        <p id="loginError" style="color:#e63946; margin-top:10px; display:none;">Неверный логин или пароль</p>
+    </div>
+
+    <!-- АДМИН-ПАНЕЛЬ -->
+    <div id="adminPanel" class="admin-panel">
+        <h2>Управление сайтом</h2>
+        <button class="admin-btn" onclick="saveContent()">💾 Сохранить</button>
+        <button class="admin-btn secondary" onclick="logout()">Выйти</button>
+        <h3 style="color:#e63946; margin-top:30px;">Основные тексты</h3>
+        <label>Заголовок (HERO)</label>
+        <input type="text" id="adminHeroTitle">
+        <label>Подзаголовок (HERO)</label>
+        <textarea id="adminHeroSubtitle"></textarea>
+        <label>Текст (HERO)</label>
+        <textarea id="adminHeroText"></textarea>
+        <label>Манифест (цитата)</label>
+        <input type="text" id="adminManifestoQuote">
+        <label>Подпись манифеста</label>
+        <input type="text" id="adminManifestoSub">
+        <label>Описание "Чем мы занимаемся"</label>
+        <textarea id="adminAboutDescription"></textarea>
+        <label>Описание "О проекте"</label>
+        <textarea id="adminAboutProject"></textarea>
+        <label>Расписание</label>
+        <textarea id="adminScheduleText"></textarea>
+        <h3 style="color:#e63946;">Галерея</h3>
+        <label>Добавить фото (URL)</label>
+        <input type="url" id="newImageUrl" placeholder="https://...">
+        <button class="admin-btn secondary" onclick="addImage()">Добавить</button>
+        <div id="adminImageList" class="admin-image-list"></div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="footer-note">TNH.PROJECT</p>
+            <p>Пространство, где танец начинается с тишины внутри</p>
+            <p>© 2025 • contemporary dance project</p>
+        </div>
+    </footer>
+
+    <script>
+        const defaultData = {
+            heroTitle: "ТУТ НЕТ ЧЕЛОВЕКА",
+            heroSubtitle: "Иногда чувства проще выразить движением, чем словами.<br>Искать свой пластический язык — значит находить новый способ быть собой.",
+            heroText: "Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.",
+            manifestoQuote: "«Здесь можно не уметь. Здесь можно чувствовать».",
+            manifestoSub: "TNH.PROJECT — пространство, где танец начинается с тишины внутри",
+            aboutDescription: "Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.",
+            aboutProject: "Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.",
+            scheduleText: "Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.",
+            galleryImages: [
+                "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            ]
+        };
+
+        let currentData = JSON.parse(localStorage.getItem('tnhData')) || JSON.parse(JSON.stringify(defaultData));
+
+        function renderSite() {
+            document.getElementById('heroTitle').innerText = currentData.heroTitle;
+            document.getElementById('heroSubtitle').innerHTML = currentData.heroSubtitle;
+            document.getElementById('heroText').innerText = currentData.heroText;
+            document.getElementById('manifestoQuote').innerText = currentData.manifestoQuote;
+            document.getElementById('manifestoSub').innerText = currentData.manifestoSub;
+            document.getElementById('aboutDescription').innerText = currentData.aboutDescription;
+            document.getElementById('aboutProject').innerText = currentData.aboutProject;
+            document.getElementById('scheduleText').innerHTML = currentData.scheduleText;
+
+            // Заполняем списки
+            document.getElementById('whyList').innerHTML = `
+            <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия, где важнее внутреннее состояние, чем внешняя оценка</li>
+            <li><i class="fas fa-user-check"></i> Профессиональный хореограф, который помогает раскрыть индивидуальность через движение</li>
+            <li><i class="fas fa-users"></i> Возможность развиваться в команде, где каждый — часть общего творческого процесса</li>
+        `;
+            document.getElementById('whyExtra').innerText = "Мы ищем увлеченных и целеустремленных танцоров, готовых присоединиться к нашему уникальному проекту по современному танцу.";
+            document.getElementById('requirementsList').innerHTML = `
+            <li><i class="fas fa-check-circle"></i> Любовь к танцу и желание развиваться в направлении contemporary.</li>
+            <li><i class="fas fa-check-circle"></i> Готовность уделять время тренировкам и репетициям.</li>
+            <li><i class="fas fa-check-circle"></i> Открытость к новым идеям и готовность экспериментировать.</li>
+        `;
+            document.getElementById('requirementsEnd').innerText = "Давайте вместе создадим нечто особенное!";
+
+            renderGallery();
+            fillAdminFields();
+        }
+
+        function renderGallery() {
+            const gallery = document.getElementById('galleryGrid');
+            if (!currentData.galleryImages || currentData.galleryImages.length === 0) {
+                gallery.innerHTML = `<div class="gallery-empty">Фотографии скоро появятся</div>`;
+            } else {
+                gallery.innerHTML = currentData.galleryImages.map(url =>
+                    `<div class="gallery-item"><img src="${url}" loading="lazy" alt="Dance"></div>`
+                ).join('');
+            }
+        }
+
+        function fillAdminFields() {
+            document.getElementById('adminHeroTitle').value = currentData.heroTitle;
+            document.getElementById('adminHeroSubtitle').value = currentData.heroSubtitle.replace(/<br>/g, '\n');
+            document.getElementById('adminHeroText').value = currentData.heroText;
+            document.getElementById('adminManifestoQuote').value = currentData.manifestoQuote;
+            document.getElementById('adminManifestoSub').value = currentData.manifestoSub;
+            document.getElementById('adminAboutDescription').value = currentData.aboutDescription;
+            document.getElementById('adminAboutProject').value = currentData.aboutProject;
+            document.getElementById('adminScheduleText').value = currentData.scheduleText.replace(/<br>/g, '\n');
+            renderAdminImageList();
+        }
+
+        function renderAdminImageList() {
+            const list = document.getElementById('adminImageList');
+            list.innerHTML = currentData.galleryImages.map((url, index) =>
+                `<img src="${url}" class="admin-image-thumb" onclick="removeImage(${index})" title="Удалить">`
+            ).join('');
+        }
+
+        function addImage() {
+            const input = document.getElementById('newImageUrl');
+            const url = input.value.trim();
+            if (url && url.startsWith('http')) {
+                currentData.galleryImages.push(url);
+                input.value = '';
+                renderGallery();
+                renderAdminImageList();
+                saveToLocalStorage();
+            } else {
+                alert('Введите корректный URL изображения');
+            }
+        }
+
+        function removeImage(index) {
+            currentData.galleryImages.splice(index, 1);
+            renderGallery();
+            renderAdminImageList();
+            saveToLocalStorage();
+        }
+
+        function saveContent() {
+            currentData.heroTitle = document.getElementById('adminHeroTitle').value;
+            currentData.heroSubtitle = document.getElementById('adminHeroSubtitle').value.replace(/\n/g, '<br>');
+            currentData.heroText = document.getElementById('adminHeroText').value;
+            currentData.manifestoQuote = document.getElementById('adminManifestoQuote').value;
+            currentData.manifestoSub = document.getElementById('adminManifestoSub').value;
+            currentData.aboutDescription = document.getElementById('adminAboutDescription').value;
+            currentData.aboutProject = document.getElementById('adminAboutProject').value;
+            currentData.scheduleText = document.getElementById('adminScheduleText').value.replace(/\n/g, '<br>');
+            saveToLocalStorage();
+            renderSite();
+            alert('Сохранено!');
+        }
+
+        function saveToLocalStorage() {
+            localStorage.setItem('tnhData', JSON.stringify(currentData));
+        }
+
+        function showLogin() {
+            document.getElementById('loginFormContainer').classList.remove('hidden');
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function hideLogin() {
+            document.getElementById('loginFormContainer').classList.add('hidden');
+        }
+
+        function checkLogin() {
+            const login = document.getElementById('loginInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+            if (login === 'admin' && password === '1234') {
+                document.getElementById('loginFormContainer').classList.add('hidden');
+                document.getElementById('adminPanel').classList.add('active');
+                fillAdminFields();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            document.getElementById('adminPanel').classList.remove('active');
+            hideLogin();
+        }
+
+        renderSite();
+    </script>
+</body>
+
+</html>
