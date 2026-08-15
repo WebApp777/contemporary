@@ -4,78 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>TNH.PROJECT — пространство, где танец начинается с тишины внутри</title>
-    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* === БАЗОВЫЕ СТИЛИ === */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: #0a0a0a;
             color: #eaeaea;
             font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            font-weight: 400;
             letter-spacing: 0.3px;
         }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        h1, h2, h3 {
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            color: #ffffff;
-            line-height: 1.2;
-            margin-bottom: 12px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: #ffffff;
-            margin-bottom: 32px;
-            border-left: 5px solid #e63946;
-            padding-left: 20px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            color: #ffffff;
-            margin-bottom: 16px;
-        }
-
-        p {
-            color: #d0d0d0;
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-        }
-
-        .accent-red {
-            color: #e63946;
-            font-weight: 600;
-        }
-
-        .gray-bg {
-            background-color: #1a1a1a;
-            border-radius: 24px;
-            padding: 40px 30px;
-            margin: 40px 0;
-            border: 1px solid #2e2e2e;
-        }
-
-        /* === ШАПКА === */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        h1, h2, h3 { font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
+        h1 { font-size: 2.8rem; color: #ffffff; margin-bottom: 12px; }
+        h2 { font-size: 2.2rem; color: #ffffff; margin-bottom: 32px; border-left: 5px solid #e63946; padding-left: 20px; }
+        h3 { font-size: 1.4rem; color: #ffffff; margin-bottom: 16px; }
+        p { color: #d0d0d0; margin-bottom: 1.2rem; font-size: 1.1rem; }
+        
         header {
             background: #0a0a0a;
             border-bottom: 2px solid #2a2a2a;
@@ -83,97 +28,29 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: blur(6px);
         }
-
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 1.9rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: #ffffff;
-            margin: 0 auto;
-        }
-
-        .logo span {
-            color: #e63946;
-        }
-
-        nav a {
-            color: #cccccc;
-            text-decoration: none;
-            margin-left: 28px;
-            font-weight: 500;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1.5px;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: #e63946;
-            border-bottom: 1px solid #e63946;
-        }
-
-        .admin-link {
-            color: #e63946 !important;
-            font-weight: 600;
-            margin-left: 20px;
-            cursor: pointer;
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        /* === ГЛАВНЫЙ ЭКРАН === */
-        .hero {
-            padding: 70px 0 50px;
-            text-align: center;
-            background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
-        }
-
-        .hero p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.3rem;
-            color: #d4d4d4;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
+        .header-inner { display: flex; justify-content: center; }
+        .logo { font-size: 1.9rem; font-weight: 700; letter-spacing: 4px; color: #fff; }
+        .logo span { color: #e63946; }
+        
+        .hero { padding: 70px 0 50px; text-align: center; background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .hero p { max-width: 700px; margin: 0 auto 30px; font-size: 1.3rem; color: #d4d4d4; font-style: italic; }
+        
         .btn-red {
             display: inline-block;
-            background-color: #e63946;
-            color: #ffffff;
+            background: #e63946;
+            color: #fff;
             padding: 14px 36px;
             font-weight: 600;
             text-decoration: none;
             border-radius: 40px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            transition: background 0.25s, transform 0.2s;
             border: 1px solid #e63946;
             margin-top: 10px;
         }
-
-        .btn-red:hover {
-            background-color: #b71c2c;
-            border-color: #b71c2c;
-            transform: scale(1.02);
-        }
-
-        /* === МАНИФЕСТ === */
+        
         .manifesto {
             background: #111;
             border-left: 8px solid #e63946;
@@ -184,112 +61,33 @@
             max-width: 850px;
             text-align: center;
         }
-
-        .manifesto p {
-            font-size: 1.5rem;
-            color: #fff;
-            font-style: italic;
-            font-weight: 300;
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        /* === ГАЛЕРЕЯ === */
-        .gallery-section {
-            padding: 40px 0 10px;
-        }
-
+        .manifesto p { font-size: 1.5rem; color: #fff; font-style: italic; }
+        
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
             margin-top: 30px;
         }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            aspect-ratio: 1 / 1;
-            transition: transform 0.2s;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: grayscale(20%);
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.02);
-            border-color: #e63946;
-        }
-
-        .gallery-empty {
-            grid-column: 1 / -1;
-            text-align: center;
-            color: #888;
-            padding: 30px;
-            border: 2px dashed #3a3a3a;
-            border-radius: 16px;
-        }
-
-        /* === СЕКЦИЯ "О ПРОЕКТЕ" === */
-        .section-about {
-            padding: 20px 0;
-        }
-
+        .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 1; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-empty { grid-column: 1 / -1; text-align: center; color: #888; padding: 30px; border: 2px dashed #3a3a3a; border-radius: 16px; }
+        
         .requirements {
-            background: #ffffff;
+            background: #fff;
             color: #1a1a1a;
             padding: 40px 30px;
             border-radius: 30px;
             margin: 40px auto;
             max-width: 950px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
         }
-
-        .requirements h2 {
-            color: #1a1a1a;
-            border-left-color: #e63946;
-        }
-
-        .requirements ul {
-            list-style: none;
-            margin: 20px 0;
-        }
-
-        .requirements li {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-            color: #222;
-        }
-
-        .requirements li i {
-            color: #e63946;
-            width: 22px;
-        }
-
-        .requirements p {
-            color: #333;
-        }
-
-        /* === ЦЕНЫ === */
-        .pricing-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 25px;
-            justify-content: center;
-        }
-
+        .requirements h2 { color: #1a1a1a; border-left-color: #e63946; }
+        .requirements ul { list-style: none; margin: 20px 0; }
+        .requirements li { padding: 10px 0; border-bottom: 1px solid #ddd; display: flex; align-items: center; gap: 12px; font-weight: 500; color: #222; }
+        .requirements li i { color: #e63946; width: 22px; }
+        .requirements p { color: #333; }
+        
+        .pricing-grid { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
         .price-card {
             background: #161616;
             border: 1px solid #3a3a3a;
@@ -297,42 +95,12 @@
             padding: 30px 25px;
             width: 260px;
             text-align: center;
-            transition: 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        .price-card:hover {
-            border-color: #e63946;
-            transform: translateY(-5px);
-            background: #1d1d1d;
-        }
-
-        .price-card h3 {
-            color: #e63946;
-            margin-bottom: 8px;
-        }
-
-        .price-card .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 10px 0;
-        }
-
-        .price-card .per-class {
-            color: #aaaaaa;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .price-card .note {
-            color: #8f8f8f;
-            font-size: 0.9rem;
-            margin-top: 12px;
-        }
-
-        /* === РАСПИСАНИЕ === */
+        .price-card h3 { color: #e63946; }
+        .price-card .price { font-size: 2.5rem; font-weight: 700; color: #fff; margin: 10px 0; }
+        .price-card .per-class { color: #aaa; font-size: 0.9rem; text-transform: uppercase; }
+        .price-card .note { color: #8f8f8f; font-size: 0.9rem; margin-top: 12px; }
+        
         .schedule-placeholder {
             background: #101010;
             border: 2px dashed #e63946;
@@ -341,70 +109,28 @@
             text-align: center;
             margin: 40px auto;
             max-width: 800px;
-            color: #ccc;
         }
-
-        .schedule-placeholder i {
-            font-size: 3rem;
-            color: #e63946;
-            margin-bottom: 20px;
-        }
-
-        /* === СОЦСЕТИ === */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin: 40px 0;
-        }
-
+        .schedule-placeholder i { font-size: 3rem; color: #e63946; margin-bottom: 20px; }
+        
+        .social-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 40px 0; }
         .social-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #1a1a1a;
-            padding: 12px 24px;
-            border-radius: 50px;
-            color: #ddd;
-            text-decoration: none;
-            font-weight: 500;
+            display: flex; align-items: center; gap: 12px;
+            background: #1a1a1a; padding: 12px 24px; border-radius: 50px;
+            color: #ddd; text-decoration: none; font-weight: 500;
             border: 1px solid #3a3a3a;
-            transition: all 0.2s;
         }
-
-        .social-link i {
-            font-size: 1.5rem;
-            color: #e63946;
-        }
-
-        .social-link:hover {
-            border-color: #e63946;
-            background: #222;
-            color: #fff;
-        }
-
+        .social-link i { font-size: 1.5rem; color: #e63946; }
+        
         footer {
             background: #050505;
             padding: 40px 0;
             text-align: center;
             border-top: 1px solid #2a2a2a;
-            color: #777;
             margin-top: 60px;
         }
-
-        footer p {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-
-        .footer-note {
-            color: #e63946;
-            letter-spacing: 2px;
-        }
-
-        /* === АДМИН-ПАНЕЛЬ === */
+        footer p { color: #888; font-size: 0.9rem; }
+        .footer-note { color: #e63946; letter-spacing: 2px; }
+        
         .admin-panel {
             background: #111;
             border: 2px solid #e63946;
@@ -412,85 +138,32 @@
             padding: 30px;
             margin: 40px auto;
             max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             display: none;
         }
-
-        .admin-panel.active {
-            display: block;
-        }
-
+        .admin-panel.active { display: block; }
         .admin-panel input, .admin-panel textarea {
             width: 100%;
             background: #1e1e1e;
             border: 1px solid #3a3a3a;
             color: #fff;
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 8px;
             margin-bottom: 15px;
-            font-size: 1rem;
         }
-
-        .admin-panel textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .admin-panel label {
-            color: #ccc;
-            display: block;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
+        .admin-panel textarea { min-height: 80px; resize: vertical; }
+        .admin-panel label { color: #ccc; display: block; margin-bottom: 5px; }
+        
         .admin-btn {
-            background-color: #e63946;
+            background: #e63946;
             color: #fff;
             border: none;
             padding: 12px 30px;
             border-radius: 40px;
-            font-weight: 600;
-            letter-spacing: 1px;
             cursor: pointer;
-            transition: 0.2s;
-            margin-right: 10px;
-            margin-top: 10px;
+            margin: 5px;
         }
-
-        .admin-btn.secondary {
-            background-color: #333;
-            border: 1px solid #555;
-        }
-
-        .admin-btn:hover {
-            background-color: #b71c2c;
-        }
-
-        .admin-btn.secondary:hover {
-            background-color: #444;
-        }
-
-        .admin-image-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .admin-image-thumb {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid #555;
-            cursor: pointer;
-        }
-
-        .admin-image-thumb:hover {
-            border-color: #e63946;
-        }
-
+        .admin-btn.secondary { background: #333; }
+        
         .login-form {
             background: #1a1a1a;
             padding: 30px;
@@ -499,40 +172,15 @@
             margin: 30px auto;
             text-align: center;
         }
-
-        .login-form input {
-            margin-bottom: 15px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* Кнопка входа внизу */
-        .mobile-admin-trigger {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        .mobile-admin-trigger a {
-            color: #e63946;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        /* адаптивность */
+        .login-form input { margin-bottom: 15px; }
+        
+        .hidden { display: none !important; }
+        .admin-trigger { text-align: center; margin: 40px 0; }
+        .admin-trigger a { color: #e63946; cursor: pointer; text-decoration: underline; }
+        
         @media (max-width: 700px) {
             h1 { font-size: 2.5rem; }
-            .header-inner { flex-direction: column; }
-            nav { display: none !important; }
-            .btn-red { padding: 12px 25px; }
             .price-card { width: 100%; max-width: 300px; }
-            .manifesto, .requirements, .admin-panel {
-                margin-left: 16px;
-                margin-right: 16px;
-            }
             .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
         }
     </style>
@@ -543,14 +191,6 @@
 <header>
     <div class="container header-inner">
         <div class="logo">TNH<span>.PROJECT</span></div>
-        <nav>
-            <a href="#about">О нас</a>
-            <a href="#why">Почему мы</a>
-            <a href="#prices">Цены</a>
-            <a href="#schedule">Расписание</a>
-            <a href="#contact">Контакты</a>
-            <span class="admin-link" onclick="showLogin()"><i class="fas fa-lock"></i> Админ</span>
-        </nav>
     </div>
 </header>
 
@@ -559,7 +199,7 @@
     <div class="container">
         <h1 id="heroTitle">ТУТ НЕТ ЧЕЛОВЕКА</h1>
         <p id="heroSubtitle">Иногда чувства проще выразить движением, чем словами.<br>Искать свой пластический язык — значит находить новый способ быть собой.</p>
-        <p id="heroText" style="font-size:1.1rem;">Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.</p>
+        <p id="heroText" style="font-size:1.1rem; font-style:normal;">Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.</p>
         <a href="#contact" class="btn-red">Присоединиться</a>
     </div>
 </section>
@@ -571,21 +211,19 @@
 </div>
 
 <!-- ГАЛЕРЕЯ -->
-<section class="gallery-section" id="gallery">
+<section id="gallery">
     <div class="container">
         <h2>Галерея</h2>
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Фото загружаются автоматически -->
-        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 </section>
 
 <!-- ЧЕМ ЗАНИМАЕМСЯ -->
-<section class="section-about" id="about">
+<section id="about">
     <div class="container">
         <h2>Чем мы занимаемся</h2>
         <p id="aboutDescription">Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.</p>
-        <div class="gray-bg">
+        <div style="background:#1a1a1a; border-radius:24px; padding:40px 30px; margin:40px 0; border:1px solid #2e2e2e;">
             <h3 style="color:#e63946;">О проекте</h3>
             <p id="aboutProject">Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.</p>
         </div>
@@ -601,7 +239,6 @@
         <li><i class="fas fa-users"></i> Возможность развиваться в команде, где каждый — часть общего творческого процесса</li>
     </ul>
     <p style="margin-top:20px; font-style:italic;">Мы ищем увлеченных и целеустремленных танцоров, готовых присоединиться к нашему уникальному проекту по современному танцу.</p>
-    
     <h3 style="color:#1a1a1a; margin-top:30px;">Требования к участникам:</h3>
     <ul>
         <li><i class="fas fa-check-circle"></i> Любовь к танцу и желание развиваться в направлении contemporary.</li>
@@ -645,7 +282,7 @@
         <div class="schedule-placeholder">
             <i class="far fa-calendar-alt"></i>
             <h3 style="color:#fff;">Расписание занятий</h3>
-            <p style="color:#bbb;">Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.</p>
+            <p style="color:#bbb;" id="scheduleText">Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.</p>
         </div>
     </div>
 </section>
@@ -659,43 +296,64 @@
             <a href="https://t.me/tnh_project" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i> Telegram</a>
             <a href="https://instagram.com/_tnh.project_" target="_blank" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
-        <p style="text-align:center; color:#aaa;">Или просто приходите — здесь начинается танец.</p>
     </div>
 </section>
 
-<!-- КНОПКА ВХОДА ДЛЯ АДМИНА -->
-<div class="mobile-admin-trigger">
+<!-- ВХОД ДЛЯ АДМИНА -->
+<div class="admin-trigger">
     <a onclick="showLogin()"><i class="fas fa-lock"></i> Вход для администратора</a>
 </div>
 
 <!-- ФОРМА ВХОДА -->
-<div id="loginFormContainer" class="login-form hidden">
-    <h3 style="color:#fff; margin-bottom:20px;">Вход в админ-панель</h3>
-    <input type="password" id="passwordInput" placeholder="Пароль" autocomplete="off">
+<div id="loginForm" class="login-form hidden">
+    <h3 style="color:#fff;">Вход в админ-панель</h3>
+    <input type="password" id="passwordInput" placeholder="Пароль">
     <button class="admin-btn" onclick="checkLogin()">Войти</button>
-    <button class="admin-btn secondary" onclick="hideLogin()">Отмена</button>
-    <p id="loginError" style="color:#e63946; margin-top:10px; display:none;">Неверный пароль</p>
+    <p id="loginError" style="color:#e63946; display:none;">Неверный пароль</p>
 </div>
 
 <!-- АДМИН-ПАНЕЛЬ -->
 <div id="adminPanel" class="admin-panel">
-    <h2 style="border-left-color:#e63946;">Управление сайтом</h2>
+    <h2>Управление сайтом</h2>
     
-    <!-- Настройки GitHub -->
-    <h3 style="color:#e63946;">Настройки GitHub</h3>
+    <!-- ТЕКСТОВЫЕ НАСТРОЙКИ -->
+    <h3 style="color:#e63946;">📝 Тексты</h3>
+    <label>Заголовок (HERO)</label>
+    <input type="text" id="editHeroTitle">
+    <label>Подзаголовок (HERO)</label>
+    <textarea id="editHeroSubtitle"></textarea>
+    <label>Текст (HERO)</label>
+    <textarea id="editHeroText"></textarea>
+    <label>Манифест (цитата)</label>
+    <input type="text" id="editManifestoQuote">
+    <label>Подпись манифеста</label>
+    <input type="text" id="editManifestoSub">
+    <label>Описание "Чем мы занимаемся"</label>
+    <textarea id="editAboutDescription"></textarea>
+    <label>Описание "О проекте"</label>
+    <textarea id="editAboutProject"></textarea>
+    <label>Текст расписания</label>
+    <textarea id="editScheduleText"></textarea>
+    <button class="admin-btn" onclick="saveTexts()">💾 Сохранить тексты</button>
+    
+    <hr style="border-color:#333; margin:25px 0;">
+    
+    <!-- НАСТРОЙКИ GITHUB -->
+    <h3 style="color:#e63946;">🔧 Настройки GitHub</h3>
     <label>Логин GitHub</label>
     <input type="text" id="githubUsername" placeholder="ваш_логин">
     <label>Название репозитория</label>
     <input type="text" id="githubRepo" placeholder="tnh-project">
     <label>Ветка</label>
     <input type="text" id="githubBranch" value="main">
-    <label>GitHub токен (для загрузки фото)</label>
+    <label>GitHub токен</label>
     <input type="password" id="githubToken" placeholder="ghp_...">
     
     <hr style="border-color:#333; margin:25px 0;">
     
-    <h3 style="color:#e63946;">Загрузка фото</h3>
-    <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff; margin-bottom:10px;">
+    <!-- ЗАГРУЗКА ФОТО -->
+    <h3 style="color:#e63946;">📸 Загрузка фото</h3>
+    <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff;">
     <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить на GitHub</button>
     <div id="uploadStatus" style="color:#e63946; margin-top:10px;"></div>
     
@@ -704,7 +362,6 @@
     <button class="admin-btn secondary" onclick="logout()">Выйти</button>
 </div>
 
-<!-- ПОДВАЛ -->
 <footer>
     <div class="container">
         <p class="footer-note">TNH.PROJECT</p>
@@ -714,18 +371,66 @@
 </footer>
 
 <script>
-    // === НАСТРОЙКИ GITHUB (по умолчанию) ===
+    // === НАСТРОЙКИ ===
+    const ADMIN_PASSWORD = "1234"; // ← пароль
     const DEFAULT_GITHUB_USERNAME = "WebApp777"; 
-    const DEFAULT_GITHUB_REPO = "contemporary";     
+    const DEFAULT_GITHUB_REPO = "contemporary"; 
     const DEFAULT_BRANCH = "main";
     const IMAGES_FOLDER = "images/";
-    const ADMIN_PASSWORD = "1234"; // ← пароль для входа
-
-    // Состояние
+    
+    // Тексты по умолчанию
+    const defaultTexts = {
+        heroTitle: "ТУТ НЕТ ЧЕЛОВЕКА",
+        heroSubtitle: "Иногда чувства проще выразить движением, чем словами.\nИскать свой пластический язык — значит находить новый способ быть собой.",
+        heroText: "Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.",
+        manifestoQuote: "«Здесь можно не уметь. Здесь можно чувствовать».",
+        manifestoSub: "TNH.PROJECT — пространство, где танец начинается с тишины внутри",
+        aboutDescription: "Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.",
+        aboutProject: "Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.",
+        scheduleText: "Здесь скоро появится актуальное расписание.\nСледите за обновлениями или напишите нам в соцсетях."
+    };
+    
+    let currentTexts = JSON.parse(localStorage.getItem('tnh_texts')) || {...defaultTexts};
     let galleryImages = [];
-    let isAdmin = false;
-
-    // Загрузка галереи при старте
+    
+    // === ЗАГРУЗКА ТЕКСТОВ ===
+    function loadTexts() {
+        document.getElementById('heroTitle').innerText = currentTexts.heroTitle;
+        document.getElementById('heroSubtitle').innerHTML = currentTexts.heroSubtitle.replace(/\n/g, '<br>');
+        document.getElementById('heroText').innerText = currentTexts.heroText;
+        document.getElementById('manifestoQuote').innerText = currentTexts.manifestoQuote;
+        document.getElementById('manifestoSub').innerText = currentTexts.manifestoSub;
+        document.getElementById('aboutDescription').innerText = currentTexts.aboutDescription;
+        document.getElementById('aboutProject').innerText = currentTexts.aboutProject;
+        document.getElementById('scheduleText').innerHTML = currentTexts.scheduleText.replace(/\n/g, '<br>');
+    }
+    
+    function fillTextFields() {
+        document.getElementById('editHeroTitle').value = currentTexts.heroTitle;
+        document.getElementById('editHeroSubtitle').value = currentTexts.heroSubtitle;
+        document.getElementById('editHeroText').value = currentTexts.heroText;
+        document.getElementById('editManifestoQuote').value = currentTexts.manifestoQuote;
+        document.getElementById('editManifestoSub').value = currentTexts.manifestoSub;
+        document.getElementById('editAboutDescription').value = currentTexts.aboutDescription;
+        document.getElementById('editAboutProject').value = currentTexts.aboutProject;
+        document.getElementById('editScheduleText').value = currentTexts.scheduleText;
+    }
+    
+    function saveTexts() {
+        currentTexts.heroTitle = document.getElementById('editHeroTitle').value;
+        currentTexts.heroSubtitle = document.getElementById('editHeroSubtitle').value;
+        currentTexts.heroText = document.getElementById('editHeroText').value;
+        currentTexts.manifestoQuote = document.getElementById('editManifestoQuote').value;
+        currentTexts.manifestoSub = document.getElementById('editManifestoSub').value;
+        currentTexts.aboutDescription = document.getElementById('editAboutDescription').value;
+        currentTexts.aboutProject = document.getElementById('editAboutProject').value;
+        currentTexts.scheduleText = document.getElementById('editScheduleText').value;
+        localStorage.setItem('tnh_texts', JSON.stringify(currentTexts));
+        loadTexts();
+        alert('✅ Тексты сохранены!');
+    }
+    
+    // === ГАЛЕРЕЯ ===
     async function loadGallery() {
         const username = localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
         const repo = localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
@@ -741,60 +446,50 @@
                 renderGallery();
             } else {
                 document.getElementById('galleryGrid').innerHTML = 
-                    '<div class="gallery-empty"><i class="fas fa-images"></i><br>Фото скоро появятся</div>';
+                    '<div class="gallery-empty">Фото скоро появятся</div>';
             }
         } catch (e) {
             document.getElementById('galleryGrid').innerHTML = 
                 '<div class="gallery-empty">Галерея загружается...</div>';
         }
     }
-
+    
     function renderGallery() {
         const grid = document.getElementById('galleryGrid');
         if (galleryImages.length === 0) {
-            grid.innerHTML = '<div class="gallery-empty"><i class="fas fa-images"></i><br>Фото скоро появятся</div>';
+            grid.innerHTML = '<div class="gallery-empty">Фото скоро появятся</div>';
         } else {
             grid.innerHTML = galleryImages.map(img => 
                 `<div class="gallery-item"><img src="${img}" alt="Dance" loading="lazy"></div>`
             ).join('');
         }
     }
-
-    // Авторизация
+    
+    // === АВТОРИЗАЦИЯ ===
     function showLogin() {
-        document.getElementById('loginFormContainer').classList.remove('hidden');
-        document.getElementById('loginError').style.display = 'none';
+        document.getElementById('loginForm').classList.remove('hidden');
     }
-
-    function hideLogin() {
-        document.getElementById('loginFormContainer').classList.add('hidden');
-    }
-
+    
     function checkLogin() {
         const password = document.getElementById('passwordInput').value;
         if (password === ADMIN_PASSWORD) {
-            isAdmin = true;
-            document.getElementById('loginFormContainer').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('adminPanel').classList.add('active');
-            // Заполняем поля из localStorage
-            document.getElementById('githubUsername').value = 
-                localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
-            document.getElementById('githubRepo').value = 
-                localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
-            document.getElementById('githubBranch').value = 
-                localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
+            fillTextFields();
+            document.getElementById('githubUsername').value = localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
+            document.getElementById('githubRepo').value = localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
+            document.getElementById('githubBranch').value = localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
         } else {
             document.getElementById('loginError').style.display = 'block';
         }
     }
-
+    
     function logout() {
-        isAdmin = false;
         document.getElementById('adminPanel').classList.remove('active');
         document.getElementById('passwordInput').value = '';
     }
-
-    // Загрузка фото на GitHub
+    
+    // === ЗАГРУЗКА ФОТО ===
     async function uploadToGitHub() {
         const username = document.getElementById('githubUsername').value.trim();
         const repo = document.getElementById('githubRepo').value.trim();
@@ -803,31 +498,27 @@
         const files = document.getElementById('fileInput').files;
         const status = document.getElementById('uploadStatus');
         
-        // Сохраняем настройки
         localStorage.setItem('gh_username', username);
         localStorage.setItem('gh_repo', repo);
         localStorage.setItem('gh_branch', branch);
         
         if (!username || !repo) {
-            status.textContent = '❌ Укажите логин и название репозитория';
+            status.textContent = '❌ Укажите логин и репозиторий';
             return;
         }
-        
         if (!token) {
             status.textContent = '❌ Введите GitHub токен';
             return;
         }
-        
         if (files.length === 0) {
-            status.textContent = '❌ Выберите фото для загрузки';
+            status.textContent = '❌ Выберите фото';
             return;
         }
-
+        
         status.textContent = '⏳ Загружаем...';
         
         for (let file of files) {
             const reader = new FileReader();
-            
             reader.onload = async function(e) {
                 const base64 = e.target.result.split(',')[1];
                 const filename = Date.now() + '-' + file.name.replace(/[^\w.-]/g, '-');
@@ -851,23 +542,21 @@
                     
                     if (response.ok) {
                         status.textContent = `✅ ${file.name} загружен!`;
-                        setTimeout(() => {
-                            loadGallery();
-                        }, 2000);
+                        setTimeout(loadGallery, 2000);
                     } else {
                         const error = await response.json();
-                        status.textContent = `❌ Ошибка: ${error.message}`;
+                        status.textContent = `❌ ${error.message}`;
                     }
                 } catch (err) {
                     status.textContent = '❌ Ошибка сети';
                 }
             };
-            
             reader.readAsDataURL(file);
         }
     }
-
-    // Инициализация
+    
+    // === ИНИЦИАЛИЗАЦИЯ ===
+    loadTexts();
     loadGallery();
 </script>
 </body>
