@@ -2,42 +2,409 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TNH.PROJECT — танец начинается с тишины внутри</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TNH.PROJECT — пространство, где танец начинается с тишины внутри</title>
+    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* === БАЗОВЫЕ СТИЛИ === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #0a0a0a;
             color: #eaeaea;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             line-height: 1.6;
+            font-weight: 400;
+            letter-spacing: 0.3px;
         }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-        h2 { font-size: 2rem; color: #fff; margin-bottom: 32px; border-left: 5px solid #e63946; padding-left: 20px; }
-        
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 32px;
+            border-left: 5px solid #e63946;
+            padding-left: 20px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: #d0d0d0;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .accent-red {
+            color: #e63946;
+            font-weight: 600;
+        }
+
+        .gray-bg {
+            background-color: #1a1a1a;
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 0;
+            border: 1px solid #2e2e2e;
+        }
+
+        /* === ШАПКА === */
         header {
             background: #0a0a0a;
             border-bottom: 2px solid #2a2a2a;
             padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(6px);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin: 0 auto;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            margin-left: 28px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #e63946;
+            border-bottom: 1px solid #e63946;
+        }
+
+        .admin-link {
+            color: #e63946 !important;
+            font-weight: 600;
+            margin-left: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* === ГЛАВНЫЙ ЭКРАН === */
+        .hero {
+            padding: 70px 0 50px;
+            text-align: center;
+            background: radial-gradient(circle at 20% 30%, #1c1c1c, #0a0a0a 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.3rem;
+            color: #d4d4d4;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .btn-red {
+            display: inline-block;
+            background-color: #e63946;
+            color: #ffffff;
+            padding: 14px 36px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: background 0.25s, transform 0.2s;
+            border: 1px solid #e63946;
+            margin-top: 10px;
+        }
+
+        .btn-red:hover {
+            background-color: #b71c2c;
+            border-color: #b71c2c;
+            transform: scale(1.02);
+        }
+
+        /* === МАНИФЕСТ === */
+        .manifesto {
+            background: #111;
+            border-left: 8px solid #e63946;
+            border-right: 8px solid #e63946;
+            padding: 40px 30px;
+            margin: 50px auto;
+            border-radius: 50px 10px 50px 10px;
+            max-width: 850px;
             text-align: center;
         }
-        .logo { font-size: 1.9rem; font-weight: 700; letter-spacing: 4px; color: #fff; }
-        .logo span { color: #e63946; }
-        
-        .hero { padding: 70px 0; text-align: center; }
-        .hero h1 { font-size: 3rem; color: #fff; }
-        .hero p { color: #d4d4d4; font-size: 1.3rem; font-style: italic; }
-        
+
+        .manifesto p {
+            font-size: 1.5rem;
+            color: #fff;
+            font-style: italic;
+            font-weight: 300;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* === ГАЛЕРЕЯ === */
+        .gallery-section {
+            padding: 40px 0 10px;
+        }
+
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
-            margin: 30px 0;
+            margin-top: 30px;
         }
-        .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 1; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            border-color: #e63946;
+        }
+
+        .gallery-empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #888;
+            padding: 30px;
+            border: 2px dashed #3a3a3a;
+            border-radius: 16px;
+        }
+
+        /* === СЕКЦИЯ "О ПРОЕКТЕ" === */
+        .section-about {
+            padding: 20px 0;
+        }
+
+        .requirements {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 40px 30px;
+            border-radius: 30px;
+            margin: 40px auto;
+            max-width: 950px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+        }
+
+        .requirements h2 {
+            color: #1a1a1a;
+            border-left-color: #e63946;
+        }
+
+        .requirements ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .requirements li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .requirements li i {
+            color: #e63946;
+            width: 22px;
+        }
+
+        .requirements p {
+            color: #333;
+        }
+
+        /* === ЦЕНЫ === */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .price-card {
+            background: #161616;
+            border: 1px solid #3a3a3a;
+            border-radius: 25px;
+            padding: 30px 25px;
+            width: 260px;
+            text-align: center;
+            transition: 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .price-card:hover {
+            border-color: #e63946;
+            transform: translateY(-5px);
+            background: #1d1d1d;
+        }
+
+        .price-card h3 {
+            color: #e63946;
+            margin-bottom: 8px;
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 10px 0;
+        }
+
+        .price-card .per-class {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-card .note {
+            color: #8f8f8f;
+            font-size: 0.9rem;
+            margin-top: 12px;
+        }
+
+        /* === РАСПИСАНИЕ === */
+        .schedule-placeholder {
+            background: #101010;
+            border: 2px dashed #e63946;
+            border-radius: 30px;
+            padding: 60px 30px;
+            text-align: center;
+            margin: 40px auto;
+            max-width: 800px;
+            color: #ccc;
+        }
+
+        .schedule-placeholder i {
+            font-size: 3rem;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        /* === СОЦСЕТИ === */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #1a1a1a;
+            padding: 12px 24px;
+            border-radius: 50px;
+            color: #ddd;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid #3a3a3a;
+            transition: all 0.2s;
+        }
+
+        .social-link i {
+            font-size: 1.5rem;
+            color: #e63946;
+        }
+
+        .social-link:hover {
+            border-color: #e63946;
+            background: #222;
+            color: #fff;
+        }
+
+        footer {
+            background: #050505;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #2a2a2a;
+            color: #777;
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .footer-note {
+            color: #e63946;
+            letter-spacing: 2px;
+        }
+
+        /* === АДМИН-ПАНЕЛЬ === */
         .admin-panel {
             background: #111;
             border: 2px solid #e63946;
@@ -45,91 +412,327 @@
             padding: 30px;
             margin: 40px auto;
             max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             display: none;
         }
-        .admin-panel.active { display: block; }
-        .admin-btn {
-            background: #e63946;
-            color: #fff;
-            padding: 12px 30px;
-            border-radius: 40px;
-            border: none;
-            cursor: pointer;
-            margin: 5px;
+
+        .admin-panel.active {
+            display: block;
         }
-        .login-form { 
-            background: #1a1a1a; 
-            padding: 30px; 
-            border-radius: 20px; 
-            max-width: 400px; 
-            margin: 30px auto; 
-            text-align: center; 
-        }
-        input[type="password"], input[type="text"] {
+
+        .admin-panel input, .admin-panel textarea {
             width: 100%;
             background: #1e1e1e;
             border: 1px solid #3a3a3a;
             color: #fff;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .admin-panel textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .admin-panel label {
+            color: #ccc;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .admin-btn {
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .admin-btn.secondary {
+            background-color: #333;
+            border: 1px solid #555;
+        }
+
+        .admin-btn:hover {
+            background-color: #b71c2c;
+        }
+
+        .admin-btn.secondary:hover {
+            background-color: #444;
+        }
+
+        .admin-image-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 15px;
         }
-        .hidden { display: none !important; }
-        .admin-trigger { text-align: center; margin: 40px 0; }
-        .admin-trigger a { color: #e63946; cursor: pointer; text-decoration: underline; }
+
+        .admin-image-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #555;
+            cursor: pointer;
+        }
+
+        .admin-image-thumb:hover {
+            border-color: #e63946;
+        }
+
+        .login-form {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .login-form input {
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Кнопка входа внизу */
+        .mobile-admin-trigger {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .mobile-admin-trigger a {
+            color: #e63946;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* адаптивность */
+        @media (max-width: 700px) {
+            h1 { font-size: 2.5rem; }
+            .header-inner { flex-direction: column; }
+            nav { display: none !important; }
+            .btn-red { padding: 12px 25px; }
+            .price-card { width: 100%; max-width: 300px; }
+            .manifesto, .requirements, .admin-panel {
+                margin-left: 16px;
+                margin-right: 16px;
+            }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+        }
     </style>
 </head>
 <body>
 
+<!-- ШАПКА -->
 <header>
-    <div class="logo">TNH<span>.PROJECT</span></div>
+    <div class="container header-inner">
+        <div class="logo">TNH<span>.PROJECT</span></div>
+        <nav>
+            <a href="#about">О нас</a>
+            <a href="#why">Почему мы</a>
+            <a href="#prices">Цены</a>
+            <a href="#schedule">Расписание</a>
+            <a href="#contact">Контакты</a>
+            <span class="admin-link" onclick="showLogin()"><i class="fas fa-lock"></i> Админ</span>
+        </nav>
+    </div>
 </header>
 
+<!-- ГЛАВНЫЙ ЭКРАН -->
 <section class="hero">
-    <h1>ТУТ НЕТ ЧЕЛОВЕКА</h1>
-    <p>Иногда чувства проще выразить движением, чем словами.</p>
-</section>
-
-<section>
     <div class="container">
-        <h2>Галерея</h2>
-        <div class="gallery-grid" id="galleryGrid"></div>
+        <h1 id="heroTitle">ТУТ НЕТ ЧЕЛОВЕКА</h1>
+        <p id="heroSubtitle">Иногда чувства проще выразить движением, чем словами.<br>Искать свой пластический язык — значит находить новый способ быть собой.</p>
+        <p id="heroText" style="font-size:1.1rem;">Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.</p>
+        <a href="#contact" class="btn-red">Присоединиться</a>
     </div>
 </section>
 
-<div class="admin-trigger">
-    <a onclick="showLogin()">🔒 Вход для администратора</a>
+<!-- МАНИФЕСТ -->
+<div class="container manifesto">
+    <p id="manifestoQuote">«Здесь можно не уметь. Здесь можно чувствовать».</p>
+    <p id="manifestoSub" style="font-size:1.1rem;">TNH.PROJECT — пространство, где танец начинается с тишины внутри</p>
 </div>
 
-<div id="loginForm" class="login-form hidden">
-    <input type="password" id="passwordInput" placeholder="Пароль">
+<!-- ГАЛЕРЕЯ -->
+<section class="gallery-section" id="gallery">
+    <div class="container">
+        <h2>Галерея</h2>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Фото загружаются автоматически -->
+        </div>
+    </div>
+</section>
+
+<!-- ЧЕМ ЗАНИМАЕМСЯ -->
+<section class="section-about" id="about">
+    <div class="container">
+        <h2>Чем мы занимаемся</h2>
+        <p id="aboutDescription">Создаём хореографию в стиле contemporary, где движение становится продолжением мысли, а тело — инструментом искренности. Мы исследуем не только пластику, но и её связь с эмоцией, с историей, которую хочется рассказать без слов.</p>
+        <div class="gray-bg">
+            <h3 style="color:#e63946;">О проекте</h3>
+            <p id="aboutProject">Проект направлен на развитие индивидуальных и групповых навыков. Мы создаем уникальные хореографические постановки, с которыми участвуем в различных фестивалях и конкурсах. Наш коллектив объединяет людей разных возрастов и уровней подготовки, стремящихся выразить себя через движение и музыку.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ПОЧЕМУ МЫ -->
+<section class="requirements" id="why">
+    <h2>Почему именно к нам?</h2>
+    <ul>
+        <li><i class="fas fa-heart"></i> Атмосфера доверия и принятия, где важнее внутреннее состояние, чем внешняя оценка</li>
+        <li><i class="fas fa-user-check"></i> Профессиональный хореограф, который помогает раскрыть индивидуальность через движение</li>
+        <li><i class="fas fa-users"></i> Возможность развиваться в команде, где каждый — часть общего творческого процесса</li>
+    </ul>
+    <p style="margin-top:20px; font-style:italic;">Мы ищем увлеченных и целеустремленных танцоров, готовых присоединиться к нашему уникальному проекту по современному танцу.</p>
+    
+    <h3 style="color:#1a1a1a; margin-top:30px;">Требования к участникам:</h3>
+    <ul>
+        <li><i class="fas fa-check-circle"></i> Любовь к танцу и желание развиваться в направлении contemporary.</li>
+        <li><i class="fas fa-check-circle"></i> Готовность уделять время тренировкам и репетициям.</li>
+        <li><i class="fas fa-check-circle"></i> Открытость к новым идеям и готовность экспериментировать.</li>
+    </ul>
+    <p>Давайте вместе создадим нечто особенное!</p>
+</section>
+
+<!-- ЦЕНЫ -->
+<section id="prices">
+    <div class="container">
+        <h2>Цены</h2>
+        <p style="text-align:center; color:#ccc;">Длительность занятия — 90 минут</p>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Разовое занятие</h3>
+                <div class="price">1400₽</div>
+                <div class="per-class">1 занятие</div>
+                <div class="note">Попробуй формат</div>
+            </div>
+            <div class="price-card">
+                <h3>Абонемент 4 занятия</h3>
+                <div class="price">4400₽</div>
+                <div class="per-class">1100₽ за занятие</div>
+                <div class="note">Экономия 1200₽</div>
+            </div>
+            <div class="price-card">
+                <h3>Абонемент 8 занятий</h3>
+                <div class="price">7200₽</div>
+                <div class="per-class">900₽ за занятие</div>
+                <div class="note">Экономия 4000₽</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- РАСПИСАНИЕ -->
+<section id="schedule">
+    <div class="container">
+        <div class="schedule-placeholder">
+            <i class="far fa-calendar-alt"></i>
+            <h3 style="color:#fff;">Расписание занятий</h3>
+            <p style="color:#bbb;">Здесь скоро появится актуальное расписание.<br>Следите за обновлениями или напишите нам в соцсетях.</p>
+        </div>
+    </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section id="contact">
+    <div class="container">
+        <h2>Мы в соцсетях</h2>
+        <div class="social-links">
+            <a href="https://vk.ru/tnh.project" target="_blank" class="social-link"><i class="fab fa-vk"></i> VK</a>
+            <a href="https://t.me/tnh_project" target="_blank" class="social-link"><i class="fab fa-telegram-plane"></i> Telegram</a>
+            <a href="https://instagram.com/_tnh.project_" target="_blank" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+        <p style="text-align:center; color:#aaa;">Или просто приходите — здесь начинается танец.</p>
+    </div>
+</section>
+
+<!-- КНОПКА ВХОДА ДЛЯ АДМИНА -->
+<div class="mobile-admin-trigger">
+    <a onclick="showLogin()"><i class="fas fa-lock"></i> Вход для администратора</a>
+</div>
+
+<!-- ФОРМА ВХОДА -->
+<div id="loginFormContainer" class="login-form hidden">
+    <h3 style="color:#fff; margin-bottom:20px;">Вход в админ-панель</h3>
+    <input type="password" id="passwordInput" placeholder="Пароль" autocomplete="off">
     <button class="admin-btn" onclick="checkLogin()">Войти</button>
+    <button class="admin-btn secondary" onclick="hideLogin()">Отмена</button>
+    <p id="loginError" style="color:#e63946; margin-top:10px; display:none;">Неверный пароль</p>
 </div>
 
+<!-- АДМИН-ПАНЕЛЬ -->
 <div id="adminPanel" class="admin-panel">
-    <h2>Управление галереей</h2>
-    <label style="color:#ccc;">GitHub токен (нужен один раз)</label>
+    <h2 style="border-left-color:#e63946;">Управление сайтом</h2>
+    
+    <!-- Настройки GitHub -->
+    <h3 style="color:#e63946;">Настройки GitHub</h3>
+    <label>Логин GitHub</label>
+    <input type="text" id="githubUsername" placeholder="ваш_логин">
+    <label>Название репозитория</label>
+    <input type="text" id="githubRepo" placeholder="tnh-project">
+    <label>Ветка</label>
+    <input type="text" id="githubBranch" value="main">
+    <label>GitHub токен (для загрузки фото)</label>
     <input type="password" id="githubToken" placeholder="ghp_...">
-    <label style="color:#ccc;">Загрузить фото</label>
-    <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff;">
+    
+    <hr style="border-color:#333; margin:25px 0;">
+    
+    <h3 style="color:#e63946;">Загрузка фото</h3>
+    <input type="file" id="fileInput" accept="image/*" multiple style="color:#fff; margin-bottom:10px;">
     <button class="admin-btn" onclick="uploadToGitHub()">📤 Загрузить на GitHub</button>
-    <div id="status" style="color:#e63946; margin-top:10px;"></div>
+    <div id="uploadStatus" style="color:#e63946; margin-top:10px;"></div>
+    
+    <hr style="border-color:#333; margin:25px 0;">
+    
+    <button class="admin-btn secondary" onclick="logout()">Выйти</button>
 </div>
+
+<!-- ПОДВАЛ -->
+<footer>
+    <div class="container">
+        <p class="footer-note">TNH.PROJECT</p>
+        <p>Пространство, где танец начинается с тишины внутри</p>
+        <p>© 2025 • contemporary dance project</p>
+    </div>
+</footer>
 
 <script>
-    // === НАСТРОЙКИ GITHUB ===
-    const GITHUB_USERNAME = "ВАШ_ЛОГИН";    // ← замените
-    const GITHUB_REPO = "tnh-project";       // ← замените
-    const BRANCH = "main";                    // или master
-    const IMAGES_FOLDER = "images/";          // папка для фото
+    // === НАСТРОЙКИ GITHUB (по умолчанию) ===
+    const DEFAULT_GITHUB_USERNAME = "WebApp777"; 
+    const DEFAULT_GITHUB_REPO = "contemporary";     
+    const DEFAULT_BRANCH = "main";
+    const IMAGES_FOLDER = "images/";
+    const ADMIN_PASSWORD = "1234"; // ← пароль для входа
 
-    // Список фото (будет загружаться с GitHub)
+    // Состояние
     let galleryImages = [];
+    let isAdmin = false;
 
-    // Загрузка списка фото с GitHub API
+    // Загрузка галереи при старте
     async function loadGallery() {
+        const username = localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
+        const repo = localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
+        const branch = localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
+        
         try {
-            const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${IMAGES_FOLDER}`);
+            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/${IMAGES_FOLDER}?ref=${branch}`);
             if (response.ok) {
                 const files = await response.json();
                 galleryImages = files
@@ -137,43 +740,78 @@
                     .map(file => file.download_url);
                 renderGallery();
             } else {
-                // Если папки нет, показываем пусто
-                document.getElementById('galleryGrid').innerHTML = '<p style="color:#888;">Фото скоро появятся</p>';
+                document.getElementById('galleryGrid').innerHTML = 
+                    '<div class="gallery-empty"><i class="fas fa-images"></i><br>Фото скоро появятся</div>';
             }
         } catch (e) {
-            document.getElementById('galleryGrid').innerHTML = '<p style="color:#888;">Галерея загружается...</p>';
+            document.getElementById('galleryGrid').innerHTML = 
+                '<div class="gallery-empty">Галерея загружается...</div>';
         }
     }
 
     function renderGallery() {
         const grid = document.getElementById('galleryGrid');
         if (galleryImages.length === 0) {
-            grid.innerHTML = '<p style="color:#888;">Фото скоро появятся</p>';
+            grid.innerHTML = '<div class="gallery-empty"><i class="fas fa-images"></i><br>Фото скоро появятся</div>';
         } else {
             grid.innerHTML = galleryImages.map(img => 
-                `<div class="gallery-item"><img src="${img}" alt="Dance"></div>`
+                `<div class="gallery-item"><img src="${img}" alt="Dance" loading="lazy"></div>`
             ).join('');
         }
     }
 
+    // Авторизация
     function showLogin() {
-        document.getElementById('loginForm').classList.remove('hidden');
+        document.getElementById('loginFormContainer').classList.remove('hidden');
+        document.getElementById('loginError').style.display = 'none';
+    }
+
+    function hideLogin() {
+        document.getElementById('loginFormContainer').classList.add('hidden');
     }
 
     function checkLogin() {
         const password = document.getElementById('passwordInput').value;
-        if (password === '1234') {
-            document.getElementById('loginForm').classList.add('hidden');
+        if (password === ADMIN_PASSWORD) {
+            isAdmin = true;
+            document.getElementById('loginFormContainer').classList.add('hidden');
             document.getElementById('adminPanel').classList.add('active');
+            // Заполняем поля из localStorage
+            document.getElementById('githubUsername').value = 
+                localStorage.getItem('gh_username') || DEFAULT_GITHUB_USERNAME;
+            document.getElementById('githubRepo').value = 
+                localStorage.getItem('gh_repo') || DEFAULT_GITHUB_REPO;
+            document.getElementById('githubBranch').value = 
+                localStorage.getItem('gh_branch') || DEFAULT_BRANCH;
         } else {
-            alert('Неверный пароль');
+            document.getElementById('loginError').style.display = 'block';
         }
     }
 
+    function logout() {
+        isAdmin = false;
+        document.getElementById('adminPanel').classList.remove('active');
+        document.getElementById('passwordInput').value = '';
+    }
+
+    // Загрузка фото на GitHub
     async function uploadToGitHub() {
+        const username = document.getElementById('githubUsername').value.trim();
+        const repo = document.getElementById('githubRepo').value.trim();
+        const branch = document.getElementById('githubBranch').value.trim();
         const token = document.getElementById('githubToken').value.trim();
         const files = document.getElementById('fileInput').files;
-        const status = document.getElementById('status');
+        const status = document.getElementById('uploadStatus');
+        
+        // Сохраняем настройки
+        localStorage.setItem('gh_username', username);
+        localStorage.setItem('gh_repo', repo);
+        localStorage.setItem('gh_branch', branch);
+        
+        if (!username || !repo) {
+            status.textContent = '❌ Укажите логин и название репозитория';
+            return;
+        }
         
         if (!token) {
             status.textContent = '❌ Введите GitHub токен';
@@ -186,17 +824,17 @@
         }
 
         status.textContent = '⏳ Загружаем...';
-
+        
         for (let file of files) {
             const reader = new FileReader();
             
             reader.onload = async function(e) {
                 const base64 = e.target.result.split(',')[1];
-                const filename = Date.now() + '-' + file.name.replace(/\s+/g, '-');
+                const filename = Date.now() + '-' + file.name.replace(/[^\w.-]/g, '-');
                 
                 try {
                     const response = await fetch(
-                        `https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/contents/${IMAGES_FOLDER}${filename}`,
+                        `https://api.github.com/repos/${username}/${repo}/contents/${IMAGES_FOLDER}${filename}`,
                         {
                             method: 'PUT',
                             headers: {
@@ -206,14 +844,16 @@
                             body: JSON.stringify({
                                 message: `Add photo ${filename}`,
                                 content: base64,
-                                branch: BRANCH
+                                branch: branch
                             })
                         }
                     );
                     
                     if (response.ok) {
                         status.textContent = `✅ ${file.name} загружен!`;
-                        loadGallery();
+                        setTimeout(() => {
+                            loadGallery();
+                        }, 2000);
                     } else {
                         const error = await response.json();
                         status.textContent = `❌ Ошибка: ${error.message}`;
@@ -227,7 +867,7 @@
         }
     }
 
-    // Загружаем галерею при старте
+    // Инициализация
     loadGallery();
 </script>
 </body>
