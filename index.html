@@ -277,9 +277,7 @@
             transition: background 0.3s ease;
         }
         .form-submit:hover { background: #b71c2c; }
-        .form-submit:disabled { background: #555; cursor: not-allowed; }
         .form-success { display: none; text-align: center; color: #4CAF50; font-weight: 600; margin-top: 15px; }
-        .form-error { display: none; text-align: center; color: #e63946; font-weight: 600; margin-top: 10px; }
         
         .requirements {
             background: #fff;
@@ -493,9 +491,8 @@
                 <label>Контактный номер или ссылка/ник <span>*</span></label>
                 <input type="text" id="formContact" placeholder="+7 999 123-45-67 или @nickname" required>
             </div>
-            <button type="submit" class="form-submit" id="formSubmitBtn">Отправить</button>
+            <button type="submit" class="form-submit">Отправить</button>
             <div class="form-success" id="formSuccess">✅ Заявка отправлена! Мы свяжемся с вами.</div>
-            <div class="form-error" id="formError">❌ Произошла ошибка. Попробуйте позже.</div>
         </form>
     </div>
 </div>
@@ -668,9 +665,8 @@
 </footer>
 
 <script>
-    // ============ НАСТРОЙКИ TELEGRAM ============
-    const TELEGRAM_BOT_TOKEN = '8860603770:AAHsQQKLM6EYrvLMVzMA4dj2jOddLrBP3UQ';
-    const TELEGRAM_CHAT_ID = '741515610';
+    // ============ НАСТРОЙКИ VK ============
+    const VK_ID = 'tnh.project'; // ← ID или username заказчицы в VK
     
     const ADMIN_PASSWORD = "1234";
     const DATA_FILE = "data.json";
@@ -1029,73 +1025,41 @@
     function openFormModal() {
         document.getElementById('formModal').classList.add('active');
         document.getElementById('formSuccess').style.display = 'none';
-        document.getElementById('formError').style.display = 'none';
     }
     
     function closeFormModal() {
         document.getElementById('formModal').classList.remove('active');
     }
     
-async function submitForm(event) {
+    function submitForm(event) {
     event.preventDefault();
     
+    // ============ НАСТРОЙКИ VK ============
+    const VK_ID_ZAKAZCHICA = 'lie.elii';
+    const VK_ID_VASH = 'serebrov_vlad';
     const name = document.getElementById('formName').value.trim();
     const age = document.getElementById('formAge').value.trim();
     const contact = document.getElementById('formContact').value.trim();
-    const submitBtn = document.getElementById('formSubmitBtn');
     
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправка...';
+    const message = `🔥 НОВАЯ ЗАЯВКА 🔥%0A%0A👤 ФИО: ${encodeURIComponent(name)}%0A🎂 Возраст: ${encodeURIComponent(age)}%0A📞 Контакт: ${encodeURIComponent(contact)}`;
     
-    const message = `🔥 НОВАЯ ЗАЯВКА 🔥\n\n👤 ФИО: ${name}\n🎂 Возраст: ${age}\n📞 Контакт: ${contact}\n📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
+    // Открываем VK заказчицы
+    window.open(`https://vk.com/write?to=${VK_ID_ZAKAZCHICA}&text=${message}`, '_blank');
     
-    // Пробуем несколько прокси по очереди
-    const proxies = [
-        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        `https://cors-anywhere.herokuapp.com/https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`)}`
-    ];
+    // Открываем ваш VK
+    setTimeout(() => {
+        window.open(`https://vk.com/write?to=${VK_ID_VASH}&text=${message}`, '_blank');
+    }, 500);
     
-    for (let proxyUrl of proxies) {
-        try {
-            const response = await fetch(proxyUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'HTML'
-                })
-            });
-            
-            if (response.ok || response.type === 'opaque') {
-                document.getElementById('formSuccess').style.display = 'block';
-                document.getElementById('formError').style.display = 'none';
-                
-                document.getElementById('formName').value = '';
-                document.getElementById('formAge').value = '';
-                document.getElementById('formContact').value = '';
-                
-                setTimeout(() => {
-                    closeFormModal();
-                }, 2000);
-                
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Отправить';
-                return;
-            }
-        } catch (err) {
-            console.log('Прокси не сработал:', proxyUrl);
-        }
-    }
+    document.getElementById('formSuccess').style.display = 'block';
     
-    // Если все прокси не сработали
-    document.getElementById('formError').style.display = 'block';
-    document.getElementById('formSuccess').style.display = 'none';
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Отправить';
+    document.getElementById('formName').value = '';
+    document.getElementById('formAge').value = '';
+    document.getElementById('formContact').value = '';
+    
+    setTimeout(() => {
+        closeFormModal();
+    }, 2000);
 }
     
     async function deleteImage(path, sha) {
