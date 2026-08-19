@@ -1036,7 +1036,7 @@
         document.getElementById('formModal').classList.remove('active');
     }
     
-    async function submitForm(event) {
+async function submitForm(event) {
     event.preventDefault();
     
     const name = document.getElementById('formName').value.trim();
@@ -1049,40 +1049,51 @@
     
     const message = `🔥 НОВАЯ ЗАЯВКА 🔥\n\n👤 ФИО: ${name}\n🎂 Возраст: ${age}\n📞 Контакт: ${contact}\n📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
     
-    try {
-        // Используем fetch с mode: 'no-cors'
-        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            mode: 'no-cors', // Добавлено для обхода CORS
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: message,
-                parse_mode: 'HTML'
-            })
-        });
-        
-        // При no-cors мы не можем проверить response.ok
-        // Поэтому считаем, что запрос прошёл
-        document.getElementById('formSuccess').style.display = 'block';
-        document.getElementById('formError').style.display = 'none';
-        
-        document.getElementById('formName').value = '';
-        document.getElementById('formAge').value = '';
-        document.getElementById('formContact').value = '';
-        
-        setTimeout(() => {
-            closeFormModal();
-        }, 2000);
-        
-    } catch (err) {
-        console.error('Ошибка:', err);
-        document.getElementById('formError').style.display = 'block';
-        document.getElementById('formSuccess').style.display = 'none';
+    // Пробуем несколько прокси по очереди
+    const proxies = [
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        `https://cors-anywhere.herokuapp.com/https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`)}`
+    ];
+    
+    for (let proxyUrl of proxies) {
+        try {
+            const response = await fetch(proxyUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            if (response.ok || response.type === 'opaque') {
+                document.getElementById('formSuccess').style.display = 'block';
+                document.getElementById('formError').style.display = 'none';
+                
+                document.getElementById('formName').value = '';
+                document.getElementById('formAge').value = '';
+                document.getElementById('formContact').value = '';
+                
+                setTimeout(() => {
+                    closeFormModal();
+                }, 2000);
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Отправить';
+                return;
+            }
+        } catch (err) {
+            console.log('Прокси не сработал:', proxyUrl);
+        }
     }
     
+    // Если все прокси не сработали
+    document.getElementById('formError').style.display = 'block';
+    document.getElementById('formSuccess').style.display = 'none';
     submitBtn.disabled = false;
     submitBtn.textContent = 'Отправить';
 }
