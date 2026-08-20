@@ -563,9 +563,9 @@
                 <input type="text" id="formName" required>
             </div>
             <div class="form-group">
-                <label>Возраст <span>*</span></label>
-                <input type="number" id="formAge" required>
-            </div>
+    <label>Возраст <span>*</span></label>
+    <input type="number" id="formAge" min="1" max="100" required>
+</div>
             <div class="form-group">
                 <label>Контактный номер <span>*</span></label>
                 <input type="tel" id="formPhone" required>
@@ -1252,27 +1252,27 @@
     });
     
     function validateForm() {
-        const name = document.getElementById('formName').value.trim();
-        const age = document.getElementById('formAge').value.trim();
-        const phone = document.getElementById('formPhone').value.trim();
-        
-        if (!name) {
-            alert('Укажите ФИО');
-            return false;
-        }
-        
-        if (!age || age < 3 || age > 100) {
-            alert('Укажите корректный возраст');
-            return false;
-        }
-        
-        if (!validatePhone(phone)) {
-            alert('Введите корректный номер телефона (11 цифр, начиная с 7 или 8)');
-            return false;
-        }
-        
-        return true;
+    const name = document.getElementById('formName').value.trim();
+    const age = document.getElementById('formAge').value.trim();
+    const phone = document.getElementById('formPhone').value.trim();
+    
+    if (!name) {
+        alert('Укажите ФИО');
+        return false;
     }
+    
+    if (!age || age < 1 || age > 100) {
+        alert('Укажите корректный возраст (от 1 до 100)');
+        return false;
+    }
+    
+    if (!validatePhone(phone)) {
+        alert('Введите корректный номер телефона (11 цифр, начиная с 7 или 8)');
+        return false;
+    }
+    
+    return true;
+}
     
     async function submitForm(event) {
         event.preventDefault();
