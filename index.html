@@ -1123,11 +1123,11 @@
     }
     
     function validatePhone(phone) {
-        // Убираем всё, кроме цифр
-        const cleaned = phone.replace(/\D/g, '');
-        // Проверяем, что начинается с 7 или 8 и длина 11 цифр
-        return /^[78]\d{10}$/.test(cleaned);
-    }
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length !== 11) return false;
+    if (cleaned[0] !== '7' && cleaned[0] !== '8') return false;
+    return true;
+}
     
     function validateForm() {
         const name = document.getElementById('formName').value.trim();
@@ -1330,6 +1330,26 @@
             closeRulesModal();
         }
     });
+
+    // Обработчик для телефона
+document.getElementById('formPhone').addEventListener('input', function(e) {
+    let value = e.target.value;
+    value = value.replace(/[^\d+\s()-]/g, '');
+    if (value.replace(/\D/g, '').length > 11) {
+        value = value.slice(0, value.length - 1);
+    }
+    e.target.value = value;
+});
+
+// Обработчик для возраста
+document.getElementById('formAge').addEventListener('input', function(e) {
+    let value = e.target.value;
+    value = value.replace(/\D/g, '');
+    if (value.length > 2) {
+        value = value.slice(0, 2);
+    }
+    e.target.value = value;
+});
     
     checkAdminURL();
     loadData();
