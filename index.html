@@ -262,6 +262,7 @@
             transition: border-color 0.2s;
         }
         .form-group input:focus { border-color: #e63946; outline: none; }
+        .form-group input.error { border-color: #e63946; }
         .form-submit {
             width: 100%;
             background: #e63946;
@@ -281,6 +282,36 @@
         .form-submit:disabled { background: #555; cursor: not-allowed; }
         .form-success { display: none; text-align: center; color: #4CAF50; font-weight: 600; margin-top: 15px; }
         .form-error { display: none; text-align: center; color: #e63946; font-weight: 600; margin-top: 10px; }
+        
+        .rules-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .rules-modal.active { display: flex; }
+        .rules-container {
+            background: #1a1a1a;
+            border: 2px solid #e63946;
+            border-radius: 24px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .rules-container h3 { color: #e63946; text-align: center; margin-bottom: 20px; }
+        .rules-close { position: absolute; top: 15px; right: 20px; color: #888; font-size: 1.5rem; cursor: pointer; transition: color 0.2s; }
+        .rules-close:hover { color: #e63946; }
+        .rules-content { color: #ccc; line-height: 1.7; }
         
         .requirements {
             background: #fff;
@@ -340,6 +371,20 @@
         .social-link i { font-size: 1.5rem; color: #e63946; transition: color 0.3s ease; }
         .social-link:hover { background: #e63946; border-color: #e63946; color: #fff; }
         .social-link:hover i { color: #fff; }
+        
+        .rules-btn-container { text-align: center; margin: 20px 0 40px; }
+        .rules-btn {
+            background: none;
+            border: 1px solid #e63946;
+            color: #e63946;
+            padding: 10px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .rules-btn:hover { background: #e63946; color: #fff; }
         
         footer {
             background: #050505;
@@ -432,7 +477,7 @@
         <h1 id="heroTitle">ТУТ НЕТ ЧЕЛОВЕКА</h1>
         <p id="heroSubtitle">Иногда чувства проще выразить движением, чем словами.<br>Искать свой пластический язык — значит находить новый способ быть собой.</p>
         <p id="heroText" style="font-size:1.1rem; font-style:normal;">Если contemporary для вас — это диалог тела и души, а танец — пространство свободы, мы приглашаем вас в нашу команду.</p>
-        <a class="btn-red" onclick="openFormModal()">Присоединиться</a>
+        <a class="btn-red" onclick="openFormModal()">Запись на занятие</a>
     </div>
 </section>
 
@@ -477,27 +522,43 @@
     <button class="modal-nav modal-next" onclick="modalNavigate(1)">❯</button>
 </div>
 
+<!-- Форма записи -->
 <div class="form-modal" id="formModal">
     <div class="form-container">
         <span class="form-close" onclick="closeFormModal()">×</span>
-        <h3>Присоединиться</h3>
+        <h3>Запись на занятие</h3>
         <form id="joinForm" onsubmit="submitForm(event)">
             <div class="form-group">
                 <label>ФИО <span>*</span></label>
-                <input type="text" id="formName" placeholder="Иванов Иван Иванович" required>
+                <input type="text" id="formName" required>
             </div>
             <div class="form-group">
                 <label>Возраст <span>*</span></label>
-                <input type="number" id="formAge" placeholder="25" min="1" max="100" required>
+                <input type="number" id="formAge" min="3" max="100" required>
             </div>
             <div class="form-group">
-                <label>Контактный номер или ссылка/ник <span>*</span></label>
-                <input type="text" id="formContact" placeholder="+7 999 123-45-67 или @nickname" required>
+                <label>Контактный номер <span>*</span></label>
+                <input type="tel" id="formPhone" required>
+            </div>
+            <div class="form-group">
+                <label>Ссылка на соц сеть / ник</label>
+                <input type="text" id="formSocial">
             </div>
             <button type="submit" class="form-submit" id="formSubmitBtn">Отправить</button>
             <div class="form-success" id="formSuccess">✅ Заявка отправлена! Мы свяжемся с вами.</div>
             <div class="form-error" id="formError">❌ Произошла ошибка. Попробуйте позже.</div>
         </form>
+    </div>
+</div>
+
+<!-- Модальное окно правил -->
+<div class="rules-modal" id="rulesModal">
+    <div class="rules-container">
+        <span class="rules-close" onclick="closeRulesModal()">×</span>
+        <h3>Правила посещения</h3>
+        <div class="rules-content" id="rulesContent">
+            Здесь будут правила посещения.
+        </div>
     </div>
 </div>
 
@@ -588,6 +649,11 @@
     </div>
 </section>
 
+<!-- Кнопка правил -->
+<div class="rules-btn-container">
+    <button class="rules-btn" onclick="openRulesModal()">Правила посещения</button>
+</div>
+
 <div id="loginForm" class="login-form hidden">
     <h3 style="color:#fff;">Вход в админ-панель</h3>
     <input type="password" id="passwordInput" placeholder="Пароль">
@@ -627,6 +693,10 @@
     <input type="text" id="editScheduleNote">
     <label>Адрес</label>
     <input type="text" id="editScheduleAddress">
+    
+    <h3 style="color:#e63946;">📋 Правила посещения</h3>
+    <label>Текст правил</label>
+    <textarea id="editRules" style="min-height: 150px;"></textarea>
     
     <h3 style="color:#e63946;">👤 Руководитель</h3>
     <label>Имя руководителя</label>
@@ -674,7 +744,6 @@
     const EMAILJS_SERVICE_ID = 'service_yyh9fqf';
     const EMAILJS_TEMPLATE_ID = 'template_f8vxy1p';
     
-    // Инициализация EmailJS
     emailjs.init(EMAILJS_PUBLIC_KEY);
     
     const ADMIN_PASSWORD = "1234";
@@ -745,6 +814,7 @@
             scheduleTime2: "20:00 - 21:30",
             scheduleNote: "Возможны переносы: 21:00 - 22:30",
             scheduleAddress: "Санкт-Петербург, ст.м. Невский проспект, Конюшенная 2В",
+            rules: "1. Приходите за 10-15 минут до начала занятия.\n2. Сменная обувь обязательна.\n3. Форма одежды — удобная, не сковывающая движения.\n4. Бутылка воды приветствуется.\n5. Отключите телефон или поставьте на беззвучный режим.",
             teacherName: "Имя Фамилия",
             teacherDescription: "Здесь будет информация о руководителе.",
             teacherPhoto: ""
@@ -765,6 +835,7 @@
         document.getElementById('scheduleTime2').innerText = siteData.scheduleTime2 || '';
         document.getElementById('scheduleNote').innerText = siteData.scheduleNote || '';
         document.getElementById('scheduleAddress').innerHTML = `<i class="fas fa-map-marker-alt"></i>${siteData.scheduleAddress || ''}`;
+        document.getElementById('rulesContent').innerHTML = (siteData.rules || '').replace(/\n/g, '<br>');
         document.getElementById('teacherName').innerText = siteData.teacherName || '';
         document.getElementById('teacherDescription').innerText = siteData.teacherDescription || '';
         if (siteData.teacherPhoto) {
@@ -815,6 +886,7 @@
         document.getElementById('editScheduleTime2').value = siteData.scheduleTime2 || '';
         document.getElementById('editScheduleNote').value = siteData.scheduleNote || '';
         document.getElementById('editScheduleAddress').value = siteData.scheduleAddress || '';
+        document.getElementById('editRules').value = siteData.rules || '';
         document.getElementById('editTeacherName').value = siteData.teacherName || '';
         document.getElementById('editTeacherDescription').value = siteData.teacherDescription || '';
         
@@ -845,6 +917,7 @@
         siteData.scheduleTime2 = document.getElementById('editScheduleTime2').value;
         siteData.scheduleNote = document.getElementById('editScheduleNote').value;
         siteData.scheduleAddress = document.getElementById('editScheduleAddress').value;
+        siteData.rules = document.getElementById('editRules').value;
         siteData.teacherName = document.getElementById('editTeacherName').value;
         siteData.teacherDescription = document.getElementById('editTeacherDescription').value;
         
@@ -1041,12 +1114,53 @@
         document.getElementById('formModal').classList.remove('active');
     }
     
+    function openRulesModal() {
+        document.getElementById('rulesModal').classList.add('active');
+    }
+    
+    function closeRulesModal() {
+        document.getElementById('rulesModal').classList.remove('active');
+    }
+    
+    function validatePhone(phone) {
+        // Убираем всё, кроме цифр
+        const cleaned = phone.replace(/\D/g, '');
+        // Проверяем, что начинается с 7 или 8 и длина 11 цифр
+        return /^[78]\d{10}$/.test(cleaned);
+    }
+    
+    function validateForm() {
+        const name = document.getElementById('formName').value.trim();
+        const age = document.getElementById('formAge').value.trim();
+        const phone = document.getElementById('formPhone').value.trim();
+        
+        if (!name) {
+            alert('Укажите ФИО');
+            return false;
+        }
+        
+        if (!age || age < 3 || age > 100) {
+            alert('Укажите корректный возраст');
+            return false;
+        }
+        
+        if (!validatePhone(phone)) {
+            alert('Введите корректный номер телефона (например: +7 999 123-45-67)');
+            return false;
+        }
+        
+        return true;
+    }
+    
     async function submitForm(event) {
         event.preventDefault();
         
+        if (!validateForm()) return;
+        
         const name = document.getElementById('formName').value.trim();
         const age = document.getElementById('formAge').value.trim();
-        const contact = document.getElementById('formContact').value.trim();
+        const phone = document.getElementById('formPhone').value.trim();
+        const social = document.getElementById('formSocial').value.trim();
         const submitBtn = document.getElementById('formSubmitBtn');
         
         submitBtn.disabled = true;
@@ -1056,7 +1170,8 @@
             await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 name: name,
                 age: age,
-                contact: contact,
+                phone: phone,
+                social: social || 'Не указано',
                 date: new Date().toLocaleString('ru-RU')
             });
             
@@ -1065,7 +1180,8 @@
             
             document.getElementById('formName').value = '';
             document.getElementById('formAge').value = '';
-            document.getElementById('formContact').value = '';
+            document.getElementById('formPhone').value = '';
+            document.getElementById('formSocial').value = '';
             
             setTimeout(() => closeFormModal(), 2000);
         } catch (err) {
@@ -1206,6 +1322,12 @@
     document.getElementById('formModal').addEventListener('click', function(e) {
         if (e.target === this) {
             closeFormModal();
+        }
+    });
+    
+    document.getElementById('rulesModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeRulesModal();
         }
     });
     
